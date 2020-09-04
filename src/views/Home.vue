@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <ImageConponent width="120" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -8,11 +8,13 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import ImageConponent from "@/components/ImageConponent.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    HelloWorld,
+    ImageConponent
   }
 };
 </script>
