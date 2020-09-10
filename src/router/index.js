@@ -1,40 +1,42 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-Vue.use(VueRouter);
+// Containers
+const TheContainer = () => import('@/components/container')
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  },
-  {
-    path: "/form",
-    name: "Form",
-    component: () =>
-      import("../views/Form.vue")
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    component: () =>
-      import("../views/Profile.vue")
-  }
-];
+// Views
+const Home = () => import('@/views/Home')
+const UsersIndex = () => import('@/views/Users/index')
 
-const router = new VueRouter({
-  routes
-});
+Vue.use(Router)
 
-export default router;
+export default new Router({
+  mode: 'hash', // https://router.vuejs.org/api/#mode
+  linkActiveClass: 'active',
+  scrollBehavior: () => ({ y: 0 }),
+  routes: configRoutes()
+})
+
+function configRoutes () {
+  return [
+    {
+      path: '/',
+      redirect: '/dashboard',
+      name: 'Home',
+      component: TheContainer,
+      children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: Home
+        },
+        {
+            path: 'users/',
+            name: 'Users',
+            component: UsersIndex
+                
+        }
+        ]
+    }
+  ]
+}
