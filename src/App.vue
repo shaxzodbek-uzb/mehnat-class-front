@@ -9,6 +9,7 @@
        |
             <CNavItem href=""><router-link to="/">Home</router-link></CNavItem>
             <CNavItem href=""><router-link to="/about">About</router-link></CNavItem>
+            <CNavItem href=""><router-link to="/form">Form</router-link></CNavItem>
           </CNavbarNav>
 
           <!-- Right aligned nav items -->
@@ -45,7 +46,7 @@
               togglerText="User"
               placement="bottom-end"
             >
-              <CDropdownItem>Profile</CDropdownItem>
+              <CDropdownItem><router-link to="/profile">Profile</router-link></CDropdownItem>
               <CDropdownItem>Signout</CDropdownItem>
             </CDropdown>
           </CNavbarNav>
