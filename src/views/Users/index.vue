@@ -2,6 +2,9 @@
   <div>
     <CCard>
       <CCardBody>
+          <CButton to="/create" size="sm" color="info" class="">
+              Create User
+          </CButton>
           <CDataTable
             :items="items"
             :fields="fields"

@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import userRoute from './user'
 
 // Containers
 const TheContainer = () => import('@/components/container')
 
 // Views
 const Home = () => import('@/views/Home')
-const UsersIndex = () => import('@/views/Users/index')
 
 Vue.use(Router)
 
@@ -26,16 +26,11 @@ function configRoutes () {
       component: TheContainer,
       children: [
         {
-          path: 'dashboard',
+          path: 'dashboard/',
           name: 'Dashboard',
-          component: Home
+          component: Home,
         },
-        {
-            path: 'users/',
-            name: 'Users',
-            component: UsersIndex
-                
-        }
+        userRoute
       ]
     }
   ]
