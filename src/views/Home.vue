@@ -2,7 +2,9 @@
   <div>
     <CCard>
       <CCardBody>
-          <CButton color="primary" class="m-2"> Salom </CButton>
+        <router-link :to="{ name: 'UserIndex' }">
+          <CButton color="success" class="m-3"> <CIcon name="cil-list"/> Foyadalanuvchilar ro'yxati</CButton>
+        </router-link>
       </CCardBody>
     </CCard>
   </div>
