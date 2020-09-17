@@ -31,22 +31,7 @@ export default {
         status: ""
       },
       items: usersData.items.map((item, id) => { return {...item, id}}),
-      roles: [{ value: "Member" }, { value: "Staff" }, { value: "Admin" }],
-      statuses: [
-        { value: "Active" },
-        { value: "Banned" },
-        { value: "Inactive" },
-        { value: "Pending" }
-      ],
-      selectOptions: [
-        "Option 1",
-        "Option 2",
-        "Option 3",
-        {
-          value: "some value",
-          label: "Selected option"
-        }
-      ]
+      
     };
   },
   methods: {

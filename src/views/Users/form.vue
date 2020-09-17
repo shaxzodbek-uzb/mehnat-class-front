@@ -10,6 +10,7 @@
           />
         </CCol>
         <CCol sm="4">
+          <FormUnit/>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Roli</label>
             <select
@@ -58,8 +59,12 @@
   </div>
 </template>
 <script>
+import FormUnit from './units'
 export default {
   name: "FormUser",
+  components: {
+    FormUnit
+  },
   props: {
     user: {
       type: Object,
@@ -70,6 +75,11 @@ export default {
   },
   data() {
     return {
+      data:{
+        label: "",
+        model: "",
+        array: ""
+      },
       roles: [{ value: "Member" }, { value: "Staff" }, { value: "Admin" }],
       statuses: [
         { value: "Active" },
