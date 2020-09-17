@@ -2,7 +2,6 @@
 export const users = 
 {
     items: [
-
         { username: 'Samppa Nori', registered: '2012/01/01', role: 'Member', status: 'Active'},
         { username: 'Estavan Lykos', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
         { username: 'Chetan Mohamed', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
@@ -28,7 +27,6 @@ export const users =
         { username: 'Einar Randall', registered: '2012/02/01', role: 'Admin', status: 'Inactive', _classes: 'table-danger'},
         { username: 'Félix Troels', registered: '2012/03/21', role: 'Staff', status: 'Active'},
         { username: 'Aulus Agmundr', registered: '2012/01/01', role: 'Member', status: 'Pending'}
-
     ],
     fields: [
         { key: 'username', _style:'min-width:200px' },

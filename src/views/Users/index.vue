@@ -1,6 +1,12 @@
 <template>
   <div>
     <CCard>
+      <router-link :to="{ name: 'UserCreate' }">
+        <CButton color="primary float-right" class="m-3">
+          <CIcon name="cil-user-plus" /> Yangi Foydalanuvchi yaratish
+        </CButton>
+      </router-link>
+      <h4 class="text-center">Foydalanuvchilar ro'yhati</h4>
       <CCardBody>
         <CDataTable
           :items="items"
@@ -8,7 +14,7 @@
           column-filter
           table-filter
           items-per-page-select
-          :items-per-page="5"
+          :items-per-page="15"
           hover
           sorter
           pagination
@@ -44,8 +50,13 @@
                     {{ item.username }}
                   </h4>
                   <p class="text-muted">User since: {{ item.registered }}</p>
-                  <CButton size="sm" color="info" class="">
-                    User Settings
+                  <CButton
+                    @click="updateUser(item.id)"
+                    size="sm"
+                    color="info"
+                    class=""
+                  >
+                    Tahrirlash
                   </CButton>
                   <CButton size="sm" color="danger" class="ml-1">
                     Delete
@@ -84,6 +95,9 @@ export default {
       this.$nextTick(() => {
         this.collapseDuration = 0;
       });
+    },
+    updateUser(id) {
+      this.$router.push({ name: "UserEdit", props: { id: id } });
     }
   }
 };

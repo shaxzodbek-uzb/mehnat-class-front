@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import userRouter from "./modules/user";
 // Containers
 const TheContainer = () => import('@/components/container')
 
 // Views
 const Home = () => import('@/views/Home')
-const UsersIndex = () => import('@/views/Users/index')
+const Login = () => import('@/views/Login')
+const Page404 = () => import('@/views/404')
 
 Vue.use(Router)
 
@@ -30,13 +31,18 @@ function configRoutes () {
           name: 'Dashboard',
           component: Home
         },
-        {
-            path: 'users/',
-            name: 'Users',
-            component: UsersIndex
-                
-        }
-        ]
+        userRouter
+      ]
+    },
+    {
+      name: 'Login',
+      path: '/login',
+      component: Login,
+    },
+    {
+      name: 'Login',
+      path: '/404',
+      component: Page404,
     }
   ]
 }
