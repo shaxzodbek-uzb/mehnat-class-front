@@ -87,6 +87,9 @@ export default {
       collapseDuration: 0
     };
   },
+  mounted() {
+    this.$api("users");
+  },
   methods: {
     getBadge,
     toggleDetails(item) {
