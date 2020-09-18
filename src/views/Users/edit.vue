@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <router-link :to="{ name: 'UserIndex'}" >
-      <p style="margin-top:-20px"> <CIcon name="cilChevronLeft" /> Foydalanuvchilar ro'yhatiga qaytish</p>
+  <CContainer class="c-app flex-column" :fluid="true">
+    <router-link :to="{ name: 'UserIndex' }" class="mb-3">
+      <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
     </router-link>
-    <CContainer class="c-app flex-row bg-white">
+    <CCard class="w-100 bg-white">
+      <CCardHeader>
+        Foydalanuvchini tahrirlash
+      </CCardHeader>
       <CCardBody class="justify-content-center">
-        <h4>Foydalanuvchini tahrirlash</h4>
         <FormUser :user="user" />
-        <CButton color="primary float-right" @click="saveUser">
+        <CButton color="primary float-right" @click="updateUser">
           <CIcon name="cil-user-plus" />Saqlash
         </CButton>
       </CCardBody>
-    </CContainer>
-  </div>
+    </CCard>
+  </CContainer>
 </template>
 <script>
-import { users as usersData } from "@/data/";
 import FormUser from "./form";
 export default {
   name: "UserCreate",
@@ -25,18 +26,29 @@ export default {
   data() {
     return {
       user: {
+        id: "",
+        fullname: "",
         username: "",
-        role: "",
-        registered: "",
-        status: ""
-      },
-      items: usersData.items.map((item, id) => { return {...item, id}}),
+        status: "",
+        age: ""
+      }
     };
+  },
+  mounted() {
+    let id = this.$route.params.id;
+    this.$api(`users/${id}`).then(({ data: { data } }) => {
+      this.user.fullname = data.fullname;
+      this.user.username = data.username;
+      this.user.status = data.status;
+      this.user.age = data.age;
+      this.user.id = data.id;
+    });
   },
   methods: {
     updateUser() {
-      console.log( usersData);
-      // usersData.push(this.user);
+      this.$api.put(`users/${this.user.id}`, { ...this.user }).then(res => {
+        console.log(res);
+      });
     }
   }
 };

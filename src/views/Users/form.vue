@@ -2,69 +2,62 @@
   <div>
     <CForm>
       <CRow>
-        <CCol sm="4">
-          <CInput
-            label="Foydalanuvchi nomi"
-            placeholder="Enter your name"
-            v-model="user.username"
-          />
-        </CCol>
-        <CCol sm="4">
-          <FormUnit/>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Roli</label>
-            <select
-              v-model="user.role"
-              class="form-control"
-              id="exampleFormControlSelect1"
-            >
-              <option
-                v-for="(role, index) in roles"
-                :key="index"
-                :value="role.value"
-                >{{ role.value }}</option
-              >
-            </select>
-          </div>
-        </CCol>
-      </CRow>
-      <CRow>
-        <CCol sm="4">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Status</label>
-            <select
-              v-model="user.status"
-              class="form-control"
-              id="exampleFormControlSelect1"
-            >
-              <option
-                v-for="(status, index) in statuses"
-                :key="index"
-                :value="status.value"
-                >{{ status.value }}</option
-              >
-            </select>
-          </div>
-        </CCol>
-        <CCol sm="4">
-          <CInput
-            type="date"
-            label="Ro'yhatdan otgan sanasi"
-            placeholder="0000 0000 0000 0000"
-            v-model="user.registered"
-          />
+        <CCol sm="8">
+          <CRow>
+            <CCol sm="12">
+              <CInput
+                label="F.I.O"
+                placeholder="F.I.O"
+                :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
+                v-model="user.fullname"
+              />
+            </CCol>
+            <CCol sm="12">
+              <CInput
+                label="Foydalanuvchi nomi"
+                placeholder="Foydalanuvchi nomi"
+                :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
+                v-model="user.username"
+              />
+            </CCol>
+            <CCol sm="12">
+              <CInput
+                label="Yoshi"
+                placeholder="Yoshi"
+                :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
+                v-model="user.age"
+              />
+            </CCol>
+            <CCol sm="12">
+              <div class="form-group form-row">
+                <label for="SelectStatus" class="col-form-label col-sm-4"
+                  >Status</label
+                >
+                <div class="col-sm-8">
+                  <select
+                    v-model="user.status"
+                    class="form-control"
+                    id="SelectStatus"
+                  >
+                    <option
+                      v-for="(status, index) in statuses"
+                      :key="index"
+                      :value="status.value"
+                      >{{ status.label }}</option
+                    >
+                  </select>
+                </div>
+              </div>
+            </CCol>
+          </CRow>
         </CCol>
       </CRow>
     </CForm>
   </div>
 </template>
 <script>
-import FormUnit from './units'
 export default {
   name: "FormUser",
-  components: {
-    FormUnit
-  },
   props: {
     user: {
       type: Object,
@@ -75,17 +68,15 @@ export default {
   },
   data() {
     return {
-      data:{
+      data: {
         label: "",
         model: "",
         array: ""
       },
       roles: [{ value: "Member" }, { value: "Staff" }, { value: "Admin" }],
       statuses: [
-        { value: "Active" },
-        { value: "Banned" },
-        { value: "Inactive" },
-        { value: "Pending" }
+        { value: 1, label: "Active" },
+        { value: 0, label: "Banned" }
       ]
     };
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <CContainer class="c-app flex-column" :fluid="true">
     <CCard>
       <router-link :to="{ name: 'UserCreate' }">
         <CButton color="primary float-right" class="m-3">
@@ -26,49 +26,23 @@
               </CBadge>
             </td>
           </template>
-          <template #show_details="{item, index}">
+          <template #show_details="{item}">
             <td class="py-2">
               <CButton
                 color="primary"
                 variant="outline"
                 square
                 size="sm"
-                @click="toggleDetails(item, index)"
+                @click="updateUser(item.id)"
               >
-                {{ Boolean(item._toggled) ? "Hide" : "Show" }}
+                Tahrirlash
               </CButton>
             </td>
-          </template>
-          <template #details="{item}">
-            <CCollapse
-              :show="Boolean(item._toggled)"
-              :duration="collapseDuration"
-            >
-              <CCardBody>
-                <CMedia :aside-image-props="{ height: 102 }">
-                  <h4>
-                    {{ item.username }}
-                  </h4>
-                  <p class="text-muted">User since: {{ item.registered }}</p>
-                  <CButton
-                    @click="updateUser(item.id)"
-                    size="sm"
-                    color="info"
-                    class=""
-                  >
-                    Tahrirlash
-                  </CButton>
-                  <CButton size="sm" color="danger" class="ml-1">
-                    Delete
-                  </CButton>
-                </CMedia>
-              </CCardBody>
-            </CCollapse>
           </template>
         </CDataTable>
       </CCardBody>
     </CCard>
-  </div>
+  </CContainer>
 </template>
 
 <script>
@@ -79,16 +53,16 @@ export default {
   name: "Users",
   data() {
     return {
-      items: usersData.items.map((item, id) => {
-        return { ...item, id };
-      }),
+      items: [],
       fields: usersData.fields,
       details: [],
       collapseDuration: 0
     };
   },
   mounted() {
-    this.$api("users");
+    this.$api("users").then(res => {
+      this.items = res.data;
+    });
   },
   methods: {
     getBadge,
@@ -100,7 +74,7 @@ export default {
       });
     },
     updateUser(id) {
-      this.$router.push({ name: "UserEdit", props: { id: id } });
+      this.$router.push({ name: "UserEdit", params: { id } });
     }
   }
 };
