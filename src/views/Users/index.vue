@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     this.$api("users").then(res => {
-      this.items = res.data;
+      this.items = res.data.data;
     });
   },
   methods: {

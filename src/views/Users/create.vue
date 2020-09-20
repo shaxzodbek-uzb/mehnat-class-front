@@ -1,21 +1,23 @@
 <template>
-  <div >
-    <router-link :to="{ name: 'UserIndex'}" >
-     <p style="margin-top:-20px"> <CIcon name="cilChevronLeft" /> Foydalanuvchilar ro'yhatiga qaytish</p>
+  <CContainer  class="c-app flex-column" :fluid="true">
+    <router-link :to="{ name: 'UserIndex'}" class="mb-3">
+     <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
     </router-link>
-    <CContainer class="c-app flex-row bg-white">
+    <CCard class="w-100 bg-white">
+      <CCardHeader>
+        Yangi foydalanuvchi qo'shish
+      </CCardHeader>
       <CCardBody class="justify-content-center">
-        <h4>Yangi foydalanuvchi qo'shish</h4>
         <FormUser :user="user" />
         <CButton color="primary float-right" @click="saveUser">
           <CIcon name="cil-user-plus" />Saqlash
         </CButton>
       </CCardBody>
-    </CContainer>
-  </div>
+    </CCard>
+    {{user}}
+  </CContainer>
 </template>
 <script>
-import { users as usersData } from "@/data/";
 import FormUser from "./form";
 export default {
   name: "UserCreate",
@@ -28,16 +30,39 @@ export default {
         username: "",
         role: "",
         registered: "",
-        status: ""
+        status: "",
+        age: ""
       },
-      items: usersData.items.map((item, id) => { return {...item, id}}),
       
     };
   },
+
   methods: {
+    validateForm() {
+      this.$refs['user'].validate((valid) => {
+        this.validated = valid
+      })
+    },
     saveUser() {
-      console.log( usersData);
-      // usersData.push(this.user);
+      this.validateForm()
+      if (this.validated) {
+        this.loading = true
+        this.saveUser(this.form)
+          .then((res) => {
+            if (res.success) {
+              this.loading = false
+              console.log("saved successfully")
+              .finally(() => {
+                this.$router.push({ name: 'UserIndex' })
+              })
+            } else {
+              console.log("this datas already saved")
+            }
+          })
+          .catch(() => {
+            console.log("error")
+          })
+      }
     }
   }
 };
