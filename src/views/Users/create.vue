@@ -14,7 +14,6 @@
         </CButton>
       </CCardBody>
     </CCard>
-    {{user}}
   </CContainer>
 </template>
 <script>
@@ -28,41 +27,25 @@ export default {
     return {
       user: {
         username: "",
-        role: "",
+        fullname: "",
         registered: "",
         status: "",
-        age: ""
+        age: "",
+        password: ""
       },
-      
     };
   },
 
   methods: {
-    validateForm() {
-      this.$refs['user'].validate((valid) => {
-        this.validated = valid
-      })
-    },
     saveUser() {
-      this.validateForm()
-      if (this.validated) {
-        this.loading = true
-        this.saveUser(this.form)
-          .then((res) => {
-            if (res.success) {
-              this.loading = false
-              console.log("saved successfully")
-              .finally(() => {
-                this.$router.push({ name: 'UserIndex' })
-              })
-            } else {
-              console.log("this datas already saved")
+        this.$api.post(`users`, {...this.user})
+        .then(res =>{
+          if (res.data.success) {
+              this.$router.push({ name: 'UserIndex' })
+          } else {
+              console.log('invalid data')
             }
-          })
-          .catch(() => {
-            console.log("error")
-          })
-      }
+        })
     }
   }
 };
