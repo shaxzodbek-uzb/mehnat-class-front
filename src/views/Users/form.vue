@@ -68,11 +68,6 @@ export default {
   },
   data() {
     return {
-      data: {
-        label: "",
-        model: "",
-        array: ""
-      },
       roles: [{ value: "Member" }, { value: "Staff" }, { value: "Admin" }],
       statuses: [
         { value: 1, label: "Active" },
