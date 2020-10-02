@@ -1,8 +1,8 @@
 export const users = {
   fields: [
     { key: "username", _style: "min-width:200px" },
-    { label: "Registered", key: "created_at" },
-    { key: "status", _style: "min-width:100px;" },
+    { label: "Age", key: "age" },
+    { label: "Articles", key: "articles", _style: "min-width:100px;" },
     {
       key: "show_details",
       label: "",

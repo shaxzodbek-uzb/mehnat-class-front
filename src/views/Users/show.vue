@@ -8,22 +8,9 @@
             Profile
         </CCardHeader>
         <CCardBody>
-            <CDataTable
-            :item="item"
-            :fields="fields"
-            hover
-            >
-            <template #status="{item}">
-                <td>
-                <CBadge :color="getBadge(item.status)">
-                    {{ item.status }}
-                </CBadge>
-                </td>
-            </template>
-            </CDataTable>
+          {{ item }}
         </CCardBody>
     </CCard>
-    {{item}}
   </CContainer>
 </template>
 
@@ -43,7 +30,7 @@ export default {
   },
   mounted() {
         let id = this.$route.params.id;
-        this.$api(`users/${id}`).then(({ data: { data } }) => {
+        this.$api(`users/${id}`, { params: {include: 'articles.comments'}}).then(({data}) => {
             this.item = data
     });
   },
