@@ -1,23 +1,29 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
-    <router-link :to="{ name: 'UserIndex'}" class="mb-3">
-     <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
-    </router-link>
     <CCard>
       <CCardHeader>
-          Profile
+        <router-link :to="{ name: 'UserIndex'}" class="mb-3">
+          <CButton shape='pill' variant="ghost" color="info" ><CIcon name="cilArrowLeft" /> </CButton>
+        </router-link>
+        <strong class="ml-2">{{item.fullname }}</strong>
       </CCardHeader>
       <CCardBody>
         <CRow>
-          <CCol col="2">
-            <CRow>
-              <img src="@/assets/images/avatar.png" width="130" alt />
+          <CCol col="12" sm="6">
+            <CRow class="header_image" :style="{ backgroundImage: 'url(' + require('@/assets/images/600x200.jpg') + ')' }">
+              <img class="avatar_profile ml-2" src="@/assets/images/avatar.png" width="130" alt />
             </CRow>
-            <p><strong>Fullname: </strong> {{ item.fullname }}</p>
-            <p><strong>Age: </strong> {{ item.age }} y.o.</p>
+            <div class="mt-5">
+              {{editUser}}
+              <CButton class="float-right" color="info" shape='pill' variant="outline" @click="editUser = !editUser"><CIcon name="cilSettings" /> Edit</CButton>
+              <h3><strong> {{ item.fullname }}</strong></h3>
+              <p class="text-muted">@{{ item.username }}</p>
+              <p><strong>Birthdate: </strong> {{ item.birth_date }}</p>
+            </div> <hr>
           </CCol>
-
-          <CCol col="5">
+        </CRow>
+        <CRow>
+          <CCol col="12" sm="6">
             <CRow v-for="(article, index) in item.articles.data" :key="index">
 
               <CCallout color="info">
@@ -47,9 +53,9 @@
               </CCollapse>
             </CRow>
           </CCol>
-
         </CRow>
       </CCardBody>
+      <registerForm v-if="editUser" :showModal="showModal" />
     </CCard>
   </CContainer>
 </template>
@@ -57,16 +63,22 @@
 <script>
 import { users as usersData } from "@/data/";
 import { getBadge } from "@/utils/html";
+import registerForm from "@/components/form/register"
 
 export default {
   name: "Users",
+  components: {
+    registerForm
+  },
   data() {
     return {
       item: [],
       fields: usersData.fields,
       details: [],
       collapseDuration: 0,
-      showComments: false
+      showComments: false,
+      showModal: true,
+      editUser: false
     };
   },
   mounted() {

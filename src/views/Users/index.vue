@@ -13,17 +13,19 @@
         <CDataTable
           :items="items"
           :fields="fields"
-          column-filter
-          table-filter
           items-per-page-select
           :items-per-page="15"
           hover
-          sorter
           pagination
         >
           <template #articles="{item}">
             <td>
               {{ item.articles.data.length == 0 ? ' ' : item.articles.data[0].alias  }}
+            </td>
+          </template>
+          <template #birth_date="{item}">
+            <td>
+              {{ item.birth_date ? calcAge(item.birth_date) : ''  }}
             </td>
           </template>
           <template #show_details="{item}">
@@ -113,6 +115,11 @@ export default {
           );
         }
       });
+    },
+    calcAge(birth_date) {
+      let date = new Date();
+      let age = date.getFullYear() - birth_date.slice(0, 4);
+      return age
     }
   }
 };
