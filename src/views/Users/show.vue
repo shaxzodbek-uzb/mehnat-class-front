@@ -42,7 +42,7 @@
                     </CWidgetIcon>
                   </CCol>
                     <CRow>
-                      <CCol col="12" sm="12">
+                      <CCol col="12" sm="12">      
                         <CInput
                           placeholder="Add comment"
                           v-model="comment.text"
