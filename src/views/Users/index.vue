@@ -13,19 +13,19 @@
         <CDataTable
           :items="items"
           :fields="fields"
-          column-filter
-          table-filter
           items-per-page-select
           :items-per-page="15"
           hover
-          sorter
           pagination
         >
-          <template #status="{item}">
+          <template #articles="{item}">
             <td>
-              <CBadge :color="getBadge(item.status)">
-                {{ item.status }}
-              </CBadge>
+              {{ item.articles.data.length == 0 ? ' ' : item.articles.data[0].alias  }}
+            </td>
+          </template>
+          <template #birth_date="{item}">
+            <td>
+              {{ item.birth_date ? calcAge(item.birth_date) : ''  }}
             </td>
           </template>
           <template #show_details="{item}">
@@ -79,13 +79,17 @@ export default {
       items: [],
       fields: usersData.fields,
       details: [],
-      collapseDuration: 0
+      collapseDuration: 0,
+      include: {
+        include: 'articles'
+      }
     };
   },
   mounted() {
-    this.$api("users").then(({data: {data}})=>
-      this.items = data
-    );
+    this.$api(`users`, { params: {include: 'articles.comments'}})
+      .then(({data: {data}})=>
+        this.items = data
+      );
   },
   methods: {
     getBadge,
@@ -111,6 +115,11 @@ export default {
           );
         }
       });
+    },
+    calcAge(birth_date) {
+      let date = new Date();
+      let age = date.getFullYear() - birth_date.slice(0, 4);
+      return age
     }
   }
 };

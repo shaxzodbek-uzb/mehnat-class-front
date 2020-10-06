@@ -11,7 +11,7 @@ Vue.use(CoreuiVue);
 
 const instance = axios.create({
   baseURL: "http://manage.mehnat.test/api/v1/",
-  timeout: 1000
+  timeout: 5000
 });
 Vue.prototype.$api = instance;
 Vue.config.productionTip = false;
