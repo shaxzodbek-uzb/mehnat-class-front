@@ -25,14 +25,11 @@
         <CRow>
           <CCol col="12" sm="6">
             <CRow v-for="(article, index) in item.articles.data" :key="index">
-
               <CCallout color="info">
                 <small class="text-muted">{{ article.alias }}</small><br>
                 <strong class="h5" @click="showComments = !showComments" style="cursor: pointer;">{{ article.text }}</strong>
               </CCallout>
-
               <CCollapse :show="showComments" class="mt-2">
-
                 <template v-if="article.comments && article.comments.length != 0 ">
                   <CCol col="12" sm="12">
                     <CWidgetIcon
@@ -43,10 +40,17 @@
                     >
                       <img src="@/assets/images/avatar_w.png" width="50" alt>
                     </CWidgetIcon>
-                    
                   </CCol>
+                    <CRow>
+                      <CCol col="12" sm="12">
+                        <CInput
+                          placeholder="Add comment"
+                          v-model="comment.text"
+                        />
+                      </CCol>
+                    </CRow>
+                    <CButton class="float-right" color="info" shape='pill' variant="outline" @click="addComment(article.id)"> Add comment</CButton>
                 </template>
-
                 <template v-else>
                   <CCard body-wrapper class="text-muted"> Izoh mavjud emas </CCard>
                 </template>
@@ -78,23 +82,47 @@ export default {
       collapseDuration: 0,
       showComments: false,
       showModal: true,
-      editUser: false
+      editUser: false,
+      showReply: false,
+      currentAlertCounter: 5,
+      showAlert: false,
+      comment: {
+        user_id: 14,
+        article_id: '',
+        text: ''
+      }
     };
   },
   mounted() {
-        let id = this.$route.params.id;
-        this.$api(`users/${id}`, { params: {include: 'articles.comments'}}).then(({ data: {data}}) => {
-            this.item = data
-    });
+    this.getData()
   },
   methods: {
     getBadge,
+    getData() {
+      let id = this.$route.params.id;
+      this.$api(`users/${id}`, { params: {include: 'articles.comments'}}).then(({ data: {data}}) => {
+          this.item = data
+      });
+    },
     toggleDetails(item) {
       this.$set(this.items[item.id], "_toggled", !item._toggled);
       this.collapseDuration = 300;
       this.$nextTick(() => {
         this.collapseDuration = 0;
       });
+    },
+    addComment(article_id) {
+      this.comment.article_id = article_id
+        this.$api.post(`comments`, {...this.comment})
+        .then(res => {
+          if (res.data.success) {
+              this.showAlert = true
+          }
+        })
+        .finally(() => {
+          this.comment.text = ''
+          this.getData()
+        })
     }
   }
 };
