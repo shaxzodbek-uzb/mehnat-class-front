@@ -10,7 +10,7 @@ import CoreuiVue from "@coreui/vue";
 Vue.use(CoreuiVue);
 
 const instance = axios.create({
-  baseURL: "http://manage.mehnat.test/api/v1/",
+  baseURL: process.env.VUE_APP_API_BASE_URL,
   timeout: 1000
 });
 Vue.prototype.$api = instance;
