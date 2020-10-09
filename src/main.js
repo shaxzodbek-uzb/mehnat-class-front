@@ -4,10 +4,12 @@ import router from "./router";
 import store from "./store";
 import { iconsSet as icons } from "./assets/icons/icons.js";
 import axios from "axios";
+import VueMaskDirective from 'v-mask'
 
 // CoreUI installation
 import CoreuiVue from "@coreui/vue";
 Vue.use(CoreuiVue);
+Vue.use(VueMaskDirective);
 
 const instance = axios.create({
   baseURL: "http://manage.mehnat.test/api/v1/",

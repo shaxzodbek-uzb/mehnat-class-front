@@ -1,19 +1,16 @@
 <template>
   <div>
     <CCard class="w-100 bg-white">
-      <CCardHeader>
-        Foydalanuvchini tahrirlash
-      </CCardHeader>
       <CCardBody class="justify-content-center">
         <CModal
-          title="Modal title"
+          title="Foydalanuvchini tahrirlash"
           color="info"
-          footer
+          :footer="false"
           :show.sync="showModal"
         >
           <CForm>
             <CRow>
-              <CCol sm="8">
+              <CCol sm="12">
                 <CRow>
                   <CCol sm="12">
                     <CInput

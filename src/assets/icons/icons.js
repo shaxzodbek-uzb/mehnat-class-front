@@ -66,7 +66,8 @@ import {
   cilPin,
   cilInstitution,
   cilHistory,
-  cilUserPlus
+  cilUserPlus,
+  cilTrash
 } from "@coreui/icons";
 export const iconsSet = Object.assign({
   cilArrowRight,
@@ -136,5 +137,6 @@ export const iconsSet = Object.assign({
   cilPin,
   cilInstitution,
   cilHistory,
-  cilUserPlus
+  cilUserPlus,
+  cilTrash,
 });

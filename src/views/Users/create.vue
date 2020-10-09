@@ -9,7 +9,7 @@
       </CCardHeader>
       <CCardBody class="justify-content-center">
         <FormUser :user="user" />
-        <CButton color="primary float-right" @click="saveUser">
+        <CButton color="info float-right" shape='pill' variant="outline" @click="saveUser">
           <CIcon name="cil-user-plus" />Saqlash
         </CButton>
       </CCardBody>
