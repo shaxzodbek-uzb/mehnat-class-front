@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import userRouter from "./modules/user";
+import auth from './middleweres/auth'
+// import middlewarePipeline from './middlewarePipeline'
 // Containers
 const TheContainer = () => import("@/components/container");
 
@@ -22,7 +24,8 @@ function configRoutes() {
   return [
     {
       path: "/",
-      redirect: "/dashboard",
+      redirect: "/login",
+      meta: { middleware: [auth] },
       name: "Home",
       component: TheContainer,
       children: [
@@ -37,7 +40,8 @@ function configRoutes() {
     {
       name: "Login",
       path: "/login",
-      component: Login
+      component: Login,
+      meta: { middleware: [auth] }
     },
     {
       name: "404",

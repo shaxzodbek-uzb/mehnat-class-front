@@ -1,6 +1,8 @@
+// import user from '../middleware/user'
 const userRouter = {
     path: 'users/',
     component: () => import('@/App'),
+    // meta: { middleware: [user] },
     children: [
         {
             path: '/',
