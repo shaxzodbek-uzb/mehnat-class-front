@@ -88,22 +88,8 @@ export default {
     submitLogin() {
       this.loading = true;
       this.login(this.credientials)
-        .then(res => {
-          let role_name = "performance";
-          try {
-            role_name = res.result.user.roles[0].name;
-          } catch (exp) {
-            console.log(exp);
-          }
-          if (res.result.deadline) {
-            this.$router.push({ name: "DeadlineForm" });
-          } else {
-            switch (role_name) {
-              case "admin":
-                this.$router.push({ name: "CustomerOrganization" });
-                break;
-            }
-          }
+        .then(() => {
+          this.$router.push({ name: "UserIndex" });
         })
         .catch(err => {
           this.showLoginError(err);

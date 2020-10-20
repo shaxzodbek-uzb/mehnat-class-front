@@ -27,7 +27,7 @@ function configRoutes() {
       path: "/",
       redirect: "/login",
       meta: { middleware: [auth] },
-      name: "Home",
+      name: "Login",
       component: TheContainer,
       children: [
         {
@@ -51,6 +51,7 @@ function configRoutes() {
     }
   ];
 }
+
 const router = createRouter()
 
 router.beforeEach((to, from, next) => {

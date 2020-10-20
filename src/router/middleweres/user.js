@@ -1,28 +1,29 @@
 import { getToken } from '@/utils/auth' // get token from cookie
 
-export default function auth({ to, from, next, store }) {
+export default function chancellery({ to, from, next, store }) {
   const hasToken = getToken()
   if (to.name === 'Login' && ((hasToken === undefined) || (hasToken === ''))) {
     return next()
   }
   if (hasToken) {
+    debugger
     store.dispatch('user/getInfo')
       .then(res => {
+        debugger
         let role_name = 'user'
         try {
           role_name = res.result.user.roles[0].name
         } catch (exp) {
           console.log(exp)
         }
-        if (to.name === 'Login') {
-          switch (role_name) {
-            case 'admin': return next({ name: 'Dashboard' }); break;
-            case 'user': return next({ name: 'UserIndex' }); break;
-          }
+        if (role_name === 'user') {
+          return next()
+        } else {
+          return next({ path: '/403' })
         }
-        return next()
       })
       .catch(err => {
+        debugger
         console.log(err)
         store.dispatch('user/resetToken')
         next({ name: 'Login' })

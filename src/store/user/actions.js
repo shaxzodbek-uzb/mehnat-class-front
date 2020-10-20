@@ -39,9 +39,8 @@ export const actions = {
   },
   getInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.post('/auth/get-info')
+      axios.post('/getInfo')
         .then(res => {
-          debugger
           if (res.success === true) {
             commit('SET_USER', res.result.user)
             commit('SET_IS_AUTH', true)
@@ -55,5 +54,13 @@ export const actions = {
           reject(err)
         })
     })
-  }
+  },
+  resetToken({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_USER_TOKEN', '')
+      commit('SET_IS_AUTH', false)
+      removeToken()
+      resolve()
+    })
+  },
 }
