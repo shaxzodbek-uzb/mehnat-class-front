@@ -72,19 +72,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
     return {
       credientials: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       }
-    }
+    };
   },
   methods: {
-    ...mapActions({ login: 'user/login' }), 
+    ...mapActions({ login: "user/login" }),
     submitLogin() {
       this.loading = true;
       this.login(this.credientials)

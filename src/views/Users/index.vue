@@ -4,7 +4,7 @@
       <CCardHeader class="">
         <h4 class="d-inline">Foydalanuvchilar ro'yhati</h4>
         <router-link :to="{ name: 'UserCreate' }">
-          <CButton color="info float-right" >
+          <CButton color="info float-right">
             <CIcon name="cil-user-plus" /> Yangi Foydalanuvchi yaratish
           </CButton>
         </router-link>
@@ -20,28 +20,26 @@
         >
           <template #articles="{item}">
             <td>
-              {{ item.articles.data.length == 0 ? ' ' : item.articles.data[0].alias  }}
+              {{
+                item.articles.data.length == 0
+                  ? " "
+                  : item.articles.data[0].alias
+              }}
             </td>
           </template>
           <template #birth_date="{item}">
             <td>
-              {{ item.birth_date ? calcAge(item.birth_date) : 10  }}
+              {{ item.birth_date ? calcAge(item.birth_date) : 10 }}
             </td>
           </template>
           <template #show_details="{item}">
             <td class="py-2" style="display:flex">
-                <CLink
-                  class="mr-3"
-                  @click="updateUser(item.id)"
-                >
-                  <CIcon name="cil-pencil" />
-                </CLink>
-                <CLink
-                  class="mr-3"
-                  @click="showUser(item.id)"
-                >
-                  <CIcon name="cil-info" />
-                </CLink>
+              <CLink class="mr-3" @click="updateUser(item.id)">
+                <CIcon name="cil-pencil" />
+              </CLink>
+              <CLink class="mr-3" @click="showUser(item.id)">
+                <CIcon name="cil-info" />
+              </CLink>
             </td>
           </template>
         </CDataTable>
@@ -63,15 +61,14 @@ export default {
       details: [],
       collapseDuration: 0,
       include: {
-        include: 'articles'
+        include: "articles"
       }
     };
   },
   mounted() {
-    this.$api(`users`, { params: {include: 'articles.comments'}})
-      .then(({data: {data}})=>
-        this.items = data
-      );
+    this.$api(`users`, { params: { include: "articles.comments" } }).then(
+      ({ data: { data } }) => (this.items = data)
+    );
   },
   methods: {
     getBadge,
@@ -91,7 +88,7 @@ export default {
     calcAge(birth_date) {
       let date = new Date();
       let age = date.getFullYear() - birth_date.slice(0, 4);
-      return age
+      return age;
     }
   }
 };

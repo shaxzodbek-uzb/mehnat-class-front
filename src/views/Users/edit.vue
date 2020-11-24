@@ -9,7 +9,12 @@
       </CCardHeader>
       <CCardBody class="justify-content-center">
         <FormUser :user="user" />
-        <CButton color="info float-right" shape='pill' variant="outline"  @click="updateUser">
+        <CButton
+          color="info float-right"
+          shape="pill"
+          variant="outline"
+          @click="updateUser"
+        >
           <CIcon name="cil-user-plus" />Saqlash
         </CButton>
       </CCardBody>
@@ -38,25 +43,26 @@ export default {
   },
   mounted() {
     let id = this.$route.params.id;
-    this.$api(`users/${id}`, { params: {include: 'articles.comments'}}).then(({ data: { data } }) => {
-      this.user.fullname = data.fullname;
-      this.user.username = data.username;
-      this.user.status = data.status;
-      this.user.birth_date = data.birth_date;
-      this.user.id = data.id;
-      this.user.phone = data.phone;
-      this.user.gender = data.gender;
-    });
+    this.$api(`users/${id}`, { params: { include: "articles.comments" } }).then(
+      ({ data: { data } }) => {
+        this.user.fullname = data.fullname;
+        this.user.username = data.username;
+        this.user.status = data.status;
+        this.user.birth_date = data.birth_date;
+        this.user.id = data.id;
+        this.user.phone = data.phone;
+        this.user.gender = data.gender;
+      }
+    );
   },
   methods: {
     updateUser() {
       this.$api.put(`users/${this.user.id}`, { ...this.user }).then(res => {
         console.log(res);
         if (res.data.success) {
-          
           this.$router.push({ name: "UserShow", params: { ...this.id } });
         } else {
-          console.log('invalid data')
+          console.log("invalid data");
         }
       });
     }

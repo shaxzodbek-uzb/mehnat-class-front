@@ -1,3 +1,3 @@
-export default function title({ next, store }) {
-  return next()
+export default function title({ next }) {
+  return next();
 }
