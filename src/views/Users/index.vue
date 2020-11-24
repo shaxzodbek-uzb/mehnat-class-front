@@ -1,29 +1,31 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
-    <CCard>
-      <router-link :to="{ name: 'UserCreate' }">
-        <CButton color="primary float-right" class="m-3">
-          <CIcon name="cil-user-plus" /> Yangi Foydalanuvchi yaratish
-        </CButton>
-      </router-link>
-      <h4 class="text-center">Foydalanuvchilar ro'yhati</h4>
+    <CCard class="w-100 bg-white">
+      <CCardHeader class="">
+        <h4 class="d-inline">Foydalanuvchilar ro'yhati</h4>
+        <router-link :to="{ name: 'UserCreate' }">
+          <CButton color="info float-right" >
+            <CIcon name="cil-user-plus" /> Yangi Foydalanuvchi yaratish
+          </CButton>
+        </router-link>
+      </CCardHeader>
       <CCardBody>
         <CDataTable
           :items="items"
           :fields="fields"
-          column-filter
-          table-filter
           items-per-page-select
           :items-per-page="15"
           hover
-          sorter
           pagination
         >
-          <template #status="{item}">
+          <template #articles="{item}">
             <td>
-              <CBadge :color="getBadge(item.status)">
-                {{ item.status }}
-              </CBadge>
+              {{ item.articles.data.length == 0 ? ' ' : item.articles.data[0].alias  }}
+            </td>
+          </template>
+          <template #birth_date="{item}">
+            <td>
+              {{ item.birth_date ? calcAge(item.birth_date) : ''  }}
             </td>
           </template>
           <template #show_details="{item}">
@@ -33,9 +35,30 @@
                 variant="outline"
                 square
                 size="sm"
+                class="mb-1 w-100"
                 @click="updateUser(item.id)"
               >
                 Tahrirlash
+              </CButton>
+              <CButton
+                color="success"
+                variant="outline"
+                square
+                size="sm"
+                class="w-100"
+                @click="showUser(item.id)"
+              >
+                Foydalanuvchi
+              </CButton>
+              <CButton
+                color="danger"
+                variant="outline"
+                square
+                size="sm"
+                class="w-100"
+                @click="deleteUser(item.id)"
+              >
+                O'chirish
               </CButton>
             </td>
           </template>
@@ -56,13 +79,17 @@ export default {
       items: [],
       fields: usersData.fields,
       details: [],
-      collapseDuration: 0
+      collapseDuration: 0,
+      include: {
+        include: 'articles'
+      }
     };
   },
   mounted() {
-    this.$api("users").then(res => {
-      this.items = res.data;
-    });
+    this.$api(`users`, { params: {include: 'articles.comments'}})
+      .then(({data: {data}})=>
+        this.items = data
+      );
   },
   methods: {
     getBadge,
@@ -75,6 +102,24 @@ export default {
     },
     updateUser(id) {
       this.$router.push({ name: "UserEdit", params: { id } });
+    },
+    showUser(id) {
+      this.$router.push({ name: "UserShow", params: { id } });
+    },
+    deleteUser(id) {
+      this.$api.delete(`users/${id}`).then(res => {
+        console.log(res);
+        if(res.data.success){
+          this.$api("users").then(({data: {data}})=>
+            this.items = data
+          );
+        }
+      });
+    },
+    calcAge(birth_date) {
+      let date = new Date();
+      let age = date.getFullYear() - birth_date.slice(0, 4);
+      return age
     }
   }
 };

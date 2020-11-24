@@ -11,7 +11,7 @@ Vue.use(CoreuiVue);
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
-  timeout: 1000
+  timeout: 5000
 });
 Vue.prototype.$api = instance;
 Vue.config.productionTip = false;

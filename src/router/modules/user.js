@@ -16,7 +16,16 @@ const userRouter = {
             path: '/edit/:id(\\d+)',
             name: 'UserEdit',
             component: () => import('@/views/Users/edit')
+        },
+        {
+            path: '/show/:id(\\d+)',
+            name: 'UserShow',
+            component: () => import('@/views/Users/show')
+        },
+        {
+            path: '/delete/:id(\\d+)',
+            name: 'UserDelete'
         }
     ]
 }
-export default userRouter
+export default userRouter 

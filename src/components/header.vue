@@ -30,7 +30,7 @@
         </CHeaderNavLink>
       </CHeaderNavItem>
     </CHeaderNav>
-    <CHeaderNav class="mr-4">
+    <CHeaderNav v-if="false" class="mr-4">
       <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
           <CIcon name="cil-bell"/>
@@ -48,9 +48,14 @@
       </CHeaderNavItem>
       <HeaderAccount/>
     </CHeaderNav>
-    <CSubheader class="px-3">
-      <CBreadcrumbRouter class="border-0 mb-0"/>
-    </CSubheader>
+
+    <CHeaderNav v-else class="mr-4">
+      <CHeaderNavItem class="d-md-down-none mx-2">
+        <CHeaderNavLink >
+          <CIcon name="cil-bell"/>
+        </CHeaderNavLink>
+      </CHeaderNavItem>
+    </CHeaderNav>
   </CHeader>
 </template>
 

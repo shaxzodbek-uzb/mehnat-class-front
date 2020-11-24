@@ -1,21 +1,22 @@
 <template>
-  <div >
-    <router-link :to="{ name: 'UserIndex'}" >
-     <p style="margin-top:-20px"> <CIcon name="cilChevronLeft" /> Foydalanuvchilar ro'yhatiga qaytish</p>
+  <CContainer  class="c-app flex-column" :fluid="true">
+    <router-link :to="{ name: 'UserIndex'}" class="mb-3">
+     <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
     </router-link>
-    <CContainer class="c-app flex-row bg-white">
+    <CCard class="w-100 bg-white">
+      <CCardHeader>
+        Yangi foydalanuvchi qo'shish
+      </CCardHeader>
       <CCardBody class="justify-content-center">
-        <h4>Yangi foydalanuvchi qo'shish</h4>
         <FormUser :user="user" />
         <CButton color="primary float-right" @click="saveUser">
           <CIcon name="cil-user-plus" />Saqlash
         </CButton>
       </CCardBody>
-    </CContainer>
-  </div>
+    </CCard>
+  </CContainer>
 </template>
 <script>
-import { users as usersData } from "@/data/";
 import FormUser from "./form";
 export default {
   name: "UserCreate",
@@ -26,18 +27,25 @@ export default {
     return {
       user: {
         username: "",
-        role: "",
+        fullname: "",
         registered: "",
-        status: ""
+        status: "",
+        age: "",
+        password: ""
       },
-      items: usersData.items.map((item, id) => { return {...item, id}}),
-      
     };
   },
+
   methods: {
     saveUser() {
-      console.log( usersData);
-      // usersData.push(this.user);
+        this.$api.post(`users`, {...this.user})
+        .then(res =>{
+          if (res.data.success) {
+              this.$router.push({ name: 'UserIndex' })
+          } else {
+              console.log('invalid data')
+            }
+        })
     }
   }
 };
