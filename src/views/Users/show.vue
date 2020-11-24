@@ -14,11 +14,12 @@
               <img class="avatar_profile ml-2" src="@/assets/images/avatar.png" width="130" alt />
             </CRow>
             <div class="mt-5">
-              {{editUser}}
-              <CButton class="float-right" color="info" shape='pill' variant="outline" @click="editUser = !editUser"><CIcon name="cilSettings" /> Edit</CButton>
+              <CButton class="float-right" color="info" shape='pill' variant="outline" @click="updateUser(item.id)"><CIcon name="cilSettings" /> Edit</CButton>
               <h3><strong> {{ item.fullname }}</strong></h3>
               <p class="text-muted">@{{ item.username }}</p>
-              <p><strong>Birthdate: </strong> {{ item.birth_date }}</p>
+              <p class="text-muted"><strong>Phone: </strong> {{ item.phone }}
+              <strong>Birthdate: </strong> {{ item.birth_date }}</p>
+              <p><strong>Status: </strong> {{ item.status }}</p>
             </div> <hr>
           </CCol>
         </CRow>
@@ -67,13 +68,9 @@
 <script>
 import { users as usersData } from "@/data/";
 import { getBadge } from "@/utils/html";
-import registerForm from "@/components/form/register"
 
 export default {
   name: "Users",
-  components: {
-    registerForm
-  },
   data() {
     return {
       item: [],
@@ -81,7 +78,6 @@ export default {
       details: [],
       collapseDuration: 0,
       showComments: false,
-      showModal: true,
       editUser: false,
       showReply: false,
       currentAlertCounter: 5,
@@ -123,7 +119,10 @@ export default {
           this.comment.text = ''
           this.getData()
         })
-    }
+    },
+    updateUser(id) {
+      this.$router.push({ name: "UserEdit", params: { id } });
+    },
   }
 };
 </script>

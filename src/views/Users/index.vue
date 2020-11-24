@@ -25,41 +25,23 @@
           </template>
           <template #birth_date="{item}">
             <td>
-              {{ item.birth_date ? calcAge(item.birth_date) : ''  }}
+              {{ item.birth_date ? calcAge(item.birth_date) : 10  }}
             </td>
           </template>
           <template #show_details="{item}">
-            <td class="py-2">
-              <CButton
-                color="primary"
-                variant="outline"
-                square
-                size="sm"
-                class="mb-1 w-100"
-                @click="updateUser(item.id)"
-              >
-                Tahrirlash
-              </CButton>
-              <CButton
-                color="success"
-                variant="outline"
-                square
-                size="sm"
-                class="w-100"
-                @click="showUser(item.id)"
-              >
-                Foydalanuvchi
-              </CButton>
-              <CButton
-                color="danger"
-                variant="outline"
-                square
-                size="sm"
-                class="w-100"
-                @click="deleteUser(item.id)"
-              >
-                O'chirish
-              </CButton>
+            <td class="py-2" style="display:flex">
+                <CLink
+                  class="mr-3"
+                  @click="updateUser(item.id)"
+                >
+                  <CIcon name="cil-pencil" />
+                </CLink>
+                <CLink
+                  class="mr-3"
+                  @click="showUser(item.id)"
+                >
+                  <CIcon name="cil-info" />
+                </CLink>
             </td>
           </template>
         </CDataTable>
@@ -105,16 +87,6 @@ export default {
     },
     showUser(id) {
       this.$router.push({ name: "UserShow", params: { id } });
-    },
-    deleteUser(id) {
-      this.$api.delete(`users/${id}`).then(res => {
-        console.log(res);
-        if(res.data.success){
-          this.$api("users").then(({data: {data}})=>
-            this.items = data
-          );
-        }
-      });
     },
     calcAge(birth_date) {
       let date = new Date();
