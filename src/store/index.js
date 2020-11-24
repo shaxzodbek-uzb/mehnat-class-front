@@ -1,20 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { user } from "./user/state.js";
+import user from './user'
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
+const store = new Vuex.Store({
+  modules: {
     user
-  },
-  mutations: {
-    setName(state, newValue) {
-      //validation
+  }
+})
 
-      state.user.name = newValue;
-    }
-  },
-  actions: {},
-  modules: {}
-});
+export default store

@@ -1,6 +1,11 @@
-export const user = {
-  name: "Shaxzodbek"
-};
-export const product = {
-  name: "Shaxzodbek"
-};
+import { getToken } from '@/utils/auth'
+
+export const state = {
+  user: {
+    is_auth: false,
+    id: '',
+    fullname: '',
+    token: getToken(),
+    role: {},
+  }
+}

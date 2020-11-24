@@ -22,28 +22,46 @@
             </CCol>
             <CCol sm="12">
               <CInput
-                label="Yoshi"
-                placeholder="Yoshi"
+                label="Tug'ilgan yili"
+                placeholder="Tug'ilgan yili"
+                type="date"
                 :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
-                v-model="user.age"
+                v-model="user.birth_date"
+              />
+            </CCol>
+            <CCol sm="12">
+              <CTextarea
+                label="Status"
+                placeholder="Statusingizni kiriting"
+                :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
+                v-model="user.status"
+              />
+            </CCol>
+            <CCol sm="12">
+              <CInput
+                label="Telefon"
+                placeholder="Telefon raqamingizni kiriting"
+                :horizontal="{ label: 'col-sm-4', input: 'col-sm-8' }"
+                v-mask="'## ### ## ##'"
+                v-model="user.phone"
               />
             </CCol>
             <CCol sm="12">
               <div class="form-group form-row">
-                <label for="SelectStatus" class="col-form-label col-sm-4"
-                  >Status</label
+                <label for="SelectGender" class="col-form-label col-sm-4"
+                  >Jinsi</label
                 >
                 <div class="col-sm-8">
                   <select
-                    v-model="user.status"
+                    v-model="user.gender"
                     class="form-control"
-                    id="SelectStatus"
+                    id="SelectGender"
                   >
                     <option
-                      v-for="(status, index) in statuses"
+                      v-for="(gender, index) in genders"
                       :key="index"
-                      :value="status.value"
-                      >{{ status.label }}</option
+                      :value="gender.value"
+                      >{{ gender.label }}</option
                     >
                   </select>
                 </div>
@@ -69,9 +87,9 @@ export default {
   data() {
     return {
       roles: [{ value: "Member" }, { value: "Staff" }, { value: "Admin" }],
-      statuses: [
-        { value: 1, label: "Active" },
-        { value: 0, label: "Banned" }
+      genders: [
+        { value: 1, label: "Erkak" },
+        { value: 2, label: "Ayol" }
       ]
     };
   }
