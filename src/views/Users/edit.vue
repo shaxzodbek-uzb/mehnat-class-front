@@ -22,7 +22,7 @@
   </CContainer>
 </template>
 <script>
-import FormUser from "./form";
+import FormUser from "@/components/form/form";
 export default {
   name: "UserCreate",
   components: {
