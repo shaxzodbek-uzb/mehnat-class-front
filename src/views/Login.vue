@@ -6,7 +6,6 @@
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
-                {{ credientials }}
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
@@ -39,7 +38,7 @@
                       <CButton color="link" class="px-0"
                         >Forgot password?</CButton
                       >
-                      <CButton color="link" class="d-lg-none"
+                      <CButton color="link" class="d-lg-none" @click="Register"
                         >Register now!</CButton
                       >
                     </CCol>
@@ -59,7 +58,12 @@
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <CButton color="light" variant="outline" size="lg">
+                <CButton
+                  color="light"
+                  variant="outline"
+                  size="lg"
+                  @click="Register"
+                >
                   Register Now!
                 </CButton>
               </CCardBody>
@@ -68,23 +72,49 @@
         </CCol>
       </CRow>
     </CContainer>
+    <RegisterModal v-if="show" :show="show" @close="show = false" />
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import RegisterModal from "./Register";
 export default {
   name: "Login",
+  components: {
+    RegisterModal
+  },
   data() {
     return {
+      show: false,
       credientials: {
         username: "",
+        password: ""
+      },
+      user: {
+        username: "",
+        fullname: "",
+        registered: "",
+        status: "",
+        age: "",
         password: ""
       }
     };
   },
   methods: {
     ...mapActions({ login: "user/login" }),
+    Register() {
+      this.show = true;
+    },
+    createUser() {
+      this.$api.post(`users`, { ...this.user }).then(res => {
+        if (res.data.success) {
+          // this.$router.push({ name: "UserIndex" });
+        } else {
+          console.log("invalid data");
+        }
+      });
+    },
     submitLogin() {
       this.loading = true;
       this.login(this.credientials)

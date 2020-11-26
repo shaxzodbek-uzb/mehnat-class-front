@@ -6,11 +6,9 @@ export default function chancellery({ to, next, store }) {
     return next();
   }
   if (hasToken) {
-    debugger;
     store
       .dispatch("user/getInfo")
       .then(res => {
-        debugger;
         let role_name = "user";
         try {
           role_name = res.result.user.roles[0].name;
@@ -24,7 +22,6 @@ export default function chancellery({ to, next, store }) {
         }
       })
       .catch(err => {
-        debugger;
         console.log(err);
         store.dispatch("user/resetToken");
         next({ name: "Login" });

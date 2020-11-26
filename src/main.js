@@ -1,13 +1,15 @@
 import Vue from "vue";
+import axios from "axios";
+import store from "./store";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import VModal from "vue-js-modal";
+import VueMaskDirective from "v-mask";
 import { iconsSet as icons } from "./assets/icons/icons.js";
-import axios from "axios";
-import VueMaskDirective from 'v-mask'
 
 // CoreUI installation
 import CoreuiVue from "@coreui/vue";
+Vue.use(VModal);
 Vue.use(CoreuiVue);
 Vue.use(VueMaskDirective);
 

@@ -47,10 +47,10 @@ export const actions = {
       axios
         .get("/getInfo")
         .then(res => {
-          if (res.success === true) {
-            commit("SET_USER", res.result.user);
+          if (res && res.status == 200) {
+            commit("SET_USER", res.data.user);
             commit("SET_IS_AUTH", true);
-            commit("SET_USER_ROLE", res.result.roles[0]);
+            commit("SET_USER_ROLE", res.data.role[0]);
             resolve(res);
           } else {
             reject(res);
