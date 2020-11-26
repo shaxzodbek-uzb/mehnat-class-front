@@ -6,7 +6,9 @@
           <CIcon size="xl" name="cil-x" />
         </p>
       </div>
-      <h4>Yangi foydalanuvchi qo'shish</h4>
+      <h4>Ro'yhatdan o'tish</h4>
+      <span class="text-muted">Tez va oson</span>
+      <hr />
       <FormRegister :user="user" />
       <CButton
         color="info float-right"
@@ -39,9 +41,10 @@ export default {
       user: {
         username: "",
         fullname: "",
-        registered: "",
+        birth_date: "",
+        phone: "",
         status: "",
-        age: "",
+        gender: "",
         password: ""
       }
     };
@@ -62,8 +65,8 @@ export default {
     },
     saveUser() {
       this.$api.post(`users`, { ...this.user }).then(res => {
-        if (res.data.success) {
-          // this.$router.push({ name: "UserIndex" });
+        if (res.data) {
+          this.hideModal();
         } else {
           console.log("invalid data");
         }
