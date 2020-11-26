@@ -13,7 +13,7 @@ export default function auth({ to, next, store }) {
         try {
           role_name = res.result.user.roles[0].name;
         } catch (exp) {
-          console.log(exp);
+          //   console.log(exp);
         }
         if (to.name === "Login") {
           switch (role_name) {

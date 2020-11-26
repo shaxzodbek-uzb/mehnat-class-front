@@ -13,7 +13,7 @@ export default function chancellery({ to, next, store }) {
         try {
           role_name = res.result.user.roles[0].name;
         } catch (exp) {
-          console.log(exp);
+          //   console.log(exp);
         }
         if (role_name === "user") {
           return next();
