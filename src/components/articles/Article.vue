@@ -12,7 +12,7 @@
     </CCallout>
     <CCollapse :show="showComments" class="mt-2 w-100">
       <Comments :comments="article.comments" />
-      <AddComment />
+      <AddComment :article="article" />
     </CCollapse>
   </CRow>
 </template>

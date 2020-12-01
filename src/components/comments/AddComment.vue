@@ -19,8 +19,17 @@
 
 <script>
 export default {
+  props: {
+    article: {
+      type: Object,
+      default() {
+        return [];
+      }
+    }
+  },
   methods: {
     addComment(article_id) {
+      debugger
       this.comment.article_id = article_id;
       this.$api
         .post(`comments`, { ...this.comment })

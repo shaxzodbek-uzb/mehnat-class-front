@@ -16,7 +16,19 @@ export default [
         _name: "CSidebarNavItem",
         name: "Users",
         to: "/users",
-        icon: "cil-speedometer"
+        icon: "cil-user"
+      },
+      {
+        _name: "CSidebarNavItem",
+        name: "Articles",
+        to: "/articles",
+        icon: "cil-text"
+      },
+      {
+        _name: "CSidebarNavItem",
+        name: "Comments",
+        to: "/comments",
+        icon: "cil-comment-square"
       }
     ]
   }
