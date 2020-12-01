@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import store from "../store";
 import userRouter from "./modules/user";
+import articleRouter from "./modules/article";
+import commentRouter from "./modules/comment";
 import auth from "./middleweres/auth";
 import middlewarePipeline from "./middlewarePipeline";
 // Containers
@@ -36,7 +38,9 @@ function configRoutes() {
           name: "Dashboard",
           component: Home
         },
-        userRouter
+        userRouter,
+        articleRouter,
+        commentRouter
       ]
     },
     {

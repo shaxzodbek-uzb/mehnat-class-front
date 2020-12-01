@@ -2,10 +2,10 @@
   <CContainer class="c-app flex-column" :fluid="true">
     <CCard class="w-100 bg-white">
       <CCardHeader class="">
-        <h4 class="d-inline">USERS LIST</h4>
-        <router-link :to="{ name: 'UserCreate' }">
+        <h4 class="d-inline">LIST ARTICLES</h4>
+        <router-link :to="{ name: 'ArticleCreate' }">
           <CButton color="info float-right">
-            <CIcon name="cil-user-plus" /> Create new user
+            <CIcon name="cil-user-plus" /> Create new Article
           </CButton>
         </router-link>
       </CCardHeader>
@@ -18,18 +18,12 @@
           hover
           pagination
         >
-          <template #articles="{item}">
+          <template #user="{item}">
             <td>
               {{
-                item.articles.data.length == 0
-                  ? " "
-                  : item.articles.data[0].alias
+                item.user.data.fullname + ' - ' + 
+                item.user.data.username
               }}
-            </td>
-          </template>
-          <template #birth_date="{item}">
-            <td>
-              {{ item.birth_date ? calcAge(item.birth_date) : 10 }}
             </td>
           </template>
           <template #show_details="{item}">
@@ -37,10 +31,10 @@
               <CLink class="mr-3" @click="updateUser(item.id)">
                 <CIcon name="cil-pencil" />
               </CLink>
-              <CLink class="mr-3" @click="showUser(item.id)">
+              <CLink class="mr-3" @click="showArticle(item.id)">
                 <CIcon name="cil-info" />
               </CLink>
-              <CLink class="mr-3" @click="deleteUser(item.id)">
+              <CLink class="mr-3" @click="deleteArticle(item.id)">
                 <CIcon name="cil-trash" />
               </CLink>
             </td>
@@ -52,14 +46,15 @@
 </template>
 
 <script>
-import { users as usersData } from "@/data/";
+import { articles as articleData } from "@/data/article";
+import { getBadge } from "@/utils/html";
 
 export default {
   name: "Users",
   data() {
     return {
       items: [],
-      fields: usersData.fields,
+      fields: articleData.fields,
       details: [],
       collapseDuration: 0,
       include: {
@@ -68,19 +63,27 @@ export default {
     };
   },
   mounted() {
-    this.$api(`users`, { params: { include: "articles.comments" } }).then(
+    this.$api(`articles`, { params: { include: "user.comments" } }).then(
       ({ data: { data } }) => (this.items = data)
     );
   },
   methods: {
+    getBadge,
+    toggleDetails(item) {
+      this.$set(this.items[item.id], "_toggled", !item._toggled);
+      this.collapseDuration = 300;
+      this.$nextTick(() => {
+        this.collapseDuration = 0;
+      });
+    },
     updateUser(id) {
       this.$router.push({ name: "UserEdit", params: { id } });
     },
-    showUser(id) {
-      this.$router.push({ name: "UserShow", params: { id } });
+    showArticle(id) {
+      this.$router.push({ name: "ArticleShow", params: { id } });
     },
-    deleteUser(id) {
-      this.$api.delete(`users/${id}`).then(res => {
+    deleteArticle(id) {
+      this.$api.delete(`articles/${id}`).then(res => {
       console.log(res); 
       window.location.reload()
       }
