@@ -20,15 +20,12 @@
         >
           <template #user="{item}">
             <td>
-              {{
-                item.user.data.fullname + ' - ' + 
-                item.user.data.username
-              }}
+              {{ item.user.data.fullname + " - " + item.user.data.username }}
             </td>
           </template>
           <template #show_details="{item}">
             <td class="py-2" style="display:flex">
-              <CLink class="mr-3" @click="updateUser(item.id)">
+              <CLink class="mr-3" @click="updateArticle(item.id)">
                 <CIcon name="cil-pencil" />
               </CLink>
               <CLink class="mr-3" @click="showArticle(item.id)">
@@ -76,18 +73,17 @@ export default {
         this.collapseDuration = 0;
       });
     },
-    updateUser(id) {
-      this.$router.push({ name: "UserEdit", params: { id } });
+    updateArticle(id) {
+      this.$router.push({ name: "ArticleEdit", params: { id } });
     },
     showArticle(id) {
       this.$router.push({ name: "ArticleShow", params: { id } });
     },
     deleteArticle(id) {
       this.$api.delete(`articles/${id}`).then(res => {
-      console.log(res); 
-      window.location.reload()
-      }
-    );
+        console.log(res);
+        window.location.reload();
+      });
     },
     calcAge(birth_date) {
       let date = new Date();

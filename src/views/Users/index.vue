@@ -81,10 +81,8 @@ export default {
     },
     deleteUser(id) {
       this.$api.delete(`users/${id}`).then(res => {
-      console.log(res); 
-      window.location.reload()
-      }
-    );
+        window.location.reload();
+      });
     },
     calcAge(birth_date) {
       let date = new Date();

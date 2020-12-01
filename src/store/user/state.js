@@ -6,6 +6,6 @@ export const state = {
     id: "",
     fullname: "",
     token: getToken(),
-    role: {}
+    roles: []
   }
 };

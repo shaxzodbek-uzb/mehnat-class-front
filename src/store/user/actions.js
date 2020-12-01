@@ -14,8 +14,6 @@ export const actions = {
           const result = res.data;
           commit("SET_USER_TOKEN", result.access_token);
           commit("SET_IS_AUTH", true);
-          // commit('SET_USER', result.user)
-          // commit('SET_USER_ROLE', result.role[0])
           setToken(result.access_token);
           resolve();
         })
