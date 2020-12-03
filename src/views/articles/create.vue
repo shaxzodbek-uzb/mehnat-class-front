@@ -23,6 +23,7 @@
 </template>
 <script>
 import FormArticle from "@/components/form/form_article";
+// import { getToken } from "@/utils/auth";
 export default {
   name: "UserCreate",
   components: {
@@ -40,6 +41,7 @@ export default {
 
   methods: {
     saveArticle() {
+      console.log(this.$api);
       this.$api.post(`articles`, { ...this.article }).then(res => {
         if (res.data.success) {
           this.$router.push({ name: "ArticleIndex" });

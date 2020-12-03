@@ -93,7 +93,7 @@ export default {
       });
     },
     delete(id) {
-      this.$api.delete(`${this.key}/${id}`).then(res => {
+      this.$api.delete(`${this.key}/${id}`).then(() => {
         window.location.reload();
       });
     }

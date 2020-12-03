@@ -20,19 +20,27 @@
         >
           <template #user="{item}">
             <td>
-              {{ item.user.data.fullname + " - " + item.user.data.username }}
+              <h5>{{ item.user.data.fullname }}</h5>
+              <p
+                class="text-primary"
+                style="cursor:pointer"
+                @click="showArticle(item.id)"
+              >
+                {{ "@" + item.user.data.username }}
+              </p>
             </td>
           </template>
           <template #show_details="{item}">
             <td class="py-2" style="display:flex">
               <CLink class="mr-3" @click="updateArticle(item.id)">
-                <CIcon name="cil-pencil" />
-              </CLink>
-              <CLink class="mr-3" @click="showArticle(item.id)">
-                <CIcon name="cil-info" />
+                <CButton color="info" variant="outline"
+                  ><CIcon name="cil-pencil"
+                /></CButton>
               </CLink>
               <CLink class="mr-3" @click="deleteArticle(item.id)">
-                <CIcon name="cil-trash" />
+                <CButton color="danger" variant="outline"
+                  ><CIcon name="cil-trash"
+                /></CButton>
               </CLink>
             </td>
           </template>

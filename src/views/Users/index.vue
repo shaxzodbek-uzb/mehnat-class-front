@@ -80,7 +80,7 @@ export default {
       this.$router.push({ name: "UserShow", params: { id } });
     },
     deleteUser(id) {
-      this.$api.delete(`users/${id}`).then(res => {
+      this.$api.delete(`users/${id}`).then(() => {
         window.location.reload();
       });
     },
