@@ -1,6 +1,6 @@
 <template>
   <BaseShow
-    :key="articles"
+    key="articles"
     title="Article details"
     :tableData="this.tableData"
     :backButton="{ name: 'ArticleIndex' }"

@@ -12,6 +12,9 @@ import CoreuiVue from "@coreui/vue";
 Vue.use(VModal);
 Vue.use(CoreuiVue);
 Vue.use(VueMaskDirective);
+//Header requests
+import { getToken } from "@/utils/auth";
+axios.defaults.headers["Authorization"] = `Bearer ${getToken()}`;
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,

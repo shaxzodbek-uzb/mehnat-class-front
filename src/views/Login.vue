@@ -1,8 +1,9 @@
 <template>
-  <div class="c-app flex-row align-items-center">
+  <div class="c-app flex-row align-items-center login_page">
     <CContainer>
       <CRow class="justify-content-center">
         <CCol md="8">
+          <h1 class="text-center">APHORISM.COM</h1>
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
@@ -54,10 +55,6 @@
             >
               <CCardBody>
                 <h2>Sign up</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
                 <CButton
                   color="light"
                   variant="outline"
@@ -131,3 +128,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.login_page {
+  background-image: url("../assets/images/background.jpg");
+}
+</style>
