@@ -2,13 +2,26 @@
   <CForm>
     <CRow>
       <CCol sm="12">
-        <CInput type="number" label="User" placeholder="User id" v-model="article.user_id" />
+        <CInput
+          type="number"
+          label="User"
+          placeholder="User id"
+          v-model="article.user_id"
+        />
       </CCol>
       <CCol sm="12">
-        <CInput label="Alias" placeholder="There write alias" v-model="article.alias" />
+        <CInput
+          label="Alias"
+          placeholder="There write alias"
+          v-model="article.alias"
+        />
       </CCol>
       <CCol sm="12">
-        <CTextarea label="Text" placeholder="There write text" v-model="article.text" />
+        <CTextarea
+          label="Text"
+          placeholder="There write text"
+          v-model="article.text"
+        />
       </CCol>
     </CRow>
   </CForm>
@@ -29,10 +42,10 @@ export default {
       items: []
     };
   },
-   mounted() {
+  mounted() {
     this.$api(`users`, { params: { include: "articles.comments" } }).then(
       ({ data: { data } }) => (this.items = data)
     );
-  },
+  }
 };
 </script>

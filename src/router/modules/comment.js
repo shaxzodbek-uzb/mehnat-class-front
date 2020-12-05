@@ -10,6 +10,11 @@ const commentRouter = {
       component: () => import("@/views/comments/index")
     },
     {
+      path: "create",
+      name: "CommentCreate",
+      component: () => import("@/views/comments/create")
+    },
+    {
       path: "edit/:id(\\d+)",
       name: "CommentEdit",
       component: () => import("@/views/comments/edit")

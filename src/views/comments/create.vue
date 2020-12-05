@@ -1,8 +1,8 @@
 <template>
   <CreateComponent
     :fields="fields"
-    apiSlug="articles"
-    indexViewName="ArticleIndex"
+    apiSlug="comments"
+    indexViewName="CommentIndex"
   />
 </template>
 
@@ -21,7 +21,7 @@ export default {
           value: "asdasd"
         },
         {
-          key: "alias",
+          key: "article_id",
           type: "text",
           label: "Maqola",
           placeholder: "Maqola idsini kiritirng",
