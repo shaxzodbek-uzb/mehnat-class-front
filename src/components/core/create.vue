@@ -1,12 +1,10 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
     <router-link :to="{ name: 'UserIndex' }" class="mb-3">
-      <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
+      <CIcon name="cilArrowLeft" /> Назад
     </router-link>
     <CCard class="w-100 bg-white">
-      <CCardHeader>
-        Yangi foydalanuvchi qo'shish
-      </CCardHeader>
+      <CCardHeader> Добавить {{ title }} </CCardHeader>
       <CCardBody class="justify-content-center">
         <CForm>
           <CRow>
@@ -101,6 +99,10 @@ export default {
       default: ""
     },
     indexViewName: {
+      type: String,
+      default: ""
+    },
+    title: {
       type: String,
       default: ""
     }

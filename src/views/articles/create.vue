@@ -3,6 +3,7 @@
     :fields="fields"
     apiSlug="articles"
     indexViewName="ArticleIndex"
+    title="пользователя"
   />
 </template>
 

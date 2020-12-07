@@ -3,6 +3,7 @@
     :fields="fields"
     apiSlug="comments"
     indexViewName="CommentIndex"
+    title="комментарий"
   />
 </template>
 
