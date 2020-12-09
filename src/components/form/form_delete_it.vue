@@ -42,7 +42,6 @@
             <input
               type="radio"
               v-model="user.gender"
-              v-for="gender in [{value:1,lael:}]"
               :value="1"
               id="customRadioInline1"
               class="custom-control-input"

@@ -1,26 +1,40 @@
 <template>
   <CCol sm="12">
     <p>{{ label }}</p>
-    <div class="form-group form-row m-1">
+    <div
+      v-for="(item, index) in options"
+      :key="index"
+      class="form-check form-check-inline"
+    >
+      <input
+        class="form-check-input"
+        type="radio"
+        name="inlineRadioOptions"
+        :id="'cutom' + index"
+        v-bind:value="item.value"
+        @input="onChange(item.value)"
+        :label="item.value"
+      />
+      <label class="form-check-label" :for="'cutom' + index">
+        {{ item.label }}
+      </label>
+    </div>
+    <!-- <div v-if="options.length" class="form-group form-row m-1">
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in options"
         :key="index"
         class="custom-control custom-radio custom-control-inline"
       >
         <input
           type="radio"
-          v-model="user.item"
-          @change="onChange"
-          :value="item.value"
-          :label="item.label"
-          :id="index"
+          v-bind:value="item.value"
+          @input="onChange(item.value)"
+          :label="item.value"
           class="custom-control-input"
         />
-        <label class="custom-control-label" :for="index">
-          {{ item.label }}
-        </label>
+        <label class="custom-control-label" :for="'cutom' + index"> </label>
       </div>
-    </div>
+    </div> -->
   </CCol>
 </template>
 
@@ -39,7 +53,7 @@ export default {
       type: String,
       default: null
     },
-    items: {
+    options: {
       type: Array,
       default() {
         return [];
@@ -48,7 +62,7 @@ export default {
   },
   methods: {
     onChange(v) {
-      this.$emit("radio", v);
+      this.$emit("input", v);
     }
   }
 };

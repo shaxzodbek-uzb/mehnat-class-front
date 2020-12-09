@@ -6,10 +6,13 @@
           <CIcon size="xl" name="cil-x" />
         </p>
       </div>
-      <h4>Ro'yhatdan o'tish</h4>
-      <span class="text-muted">Tez va oson</span>
+      <CreateComponent
+        :fields="fields"
+        apiSlug="users"
+        indexViewName="UserIndex"
+        title="пользаватель"
+      />
       <hr />
-      <FormRegister :user="user" />
       <CButton
         color="info float-right"
         class="m-2"
@@ -22,11 +25,12 @@
   </modal>
 </template>
 <script>
-import FormRegister from "@/components/form/form";
+import CreateComponent from "@/components/core/create";
+import { userFields } from "@/data/index";
 export default {
   name: "FormUser",
   components: {
-    FormRegister
+    CreateComponent
   },
   props: {
     show: {
@@ -38,11 +42,12 @@ export default {
   },
   data() {
     return {
+      fields: [],
       user: {
         username: "",
         fullname: "",
         birth_date: "",
-        phone: "",
+        phone: "11231",
         status: "",
         gender: "",
         password: ""
@@ -50,6 +55,7 @@ export default {
     };
   },
   mounted() {
+    this.fields = userFields;
     this.showModal();
   },
   methods: {

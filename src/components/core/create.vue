@@ -11,60 +11,13 @@
             <component
               v-for="field in fields"
               :key="field.key"
+              :options="field.options"
               :label="field.label"
               :placeholder="field.placeholder"
               :is="field.type + 'Input'"
               v-model="field.value"
             >
             </component>
-            {{ fields }}
-            <!-- <CCol sm="12">
-              <CInput
-                label="Tug'ilgan yili"
-                placeholder="Tug'ilgan yili"
-                type="date"
-                v-model="user.birth_date"
-              />
-            </CCol>
-            <CCol sm="12">
-              <CInput
-                label="Telefon"
-                placeholder="Telefon raqamingizni kiriting"
-                v-mask="'## ### ## ##'"
-                v-model="user.phone"
-              />
-            </CCol>
-            <CCol sm="12">
-              <p>Jins</p>
-              <div class="form-group form-row m-1">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input
-                    type="radio"
-                    v-model="user.gender"
-                    :value="1"
-                    id="customRadioInline1"
-                    name="customRadioInline1"
-                    class="custom-control-input"
-                  />
-                  <label class="custom-control-label" for="customRadioInline1"
-                    >Erkak</label
-                  >
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input
-                    type="radio"
-                    v-model="user.gender"
-                    :value="2"
-                    id="customRadioInline2"
-                    name="customRadioInline1"
-                    class="custom-control-input"
-                  />
-                  <label class="custom-control-label" for="customRadioInline2"
-                    >Ayol</label
-                  >
-                </div>
-              </div>
-            </CCol> -->
           </CRow>
         </CForm>
         <CButton
@@ -82,10 +35,18 @@
 <script>
 import textInput from "@/components/core/form-components/textInput";
 import textAreaInput from "@/components/core/form-components/textAreaInput";
+import passwordInput from "@/components/core/form-components/passwordInput";
+import selectInput from "@/components/core/form-components/selectInput";
+import dateInput from "@/components/core/form-components/dateInput";
+import radioInput from "@/components/core/form-components/radioInput";
 export default {
   components: {
     textInput,
-    textAreaInput
+    textAreaInput,
+    passwordInput,
+    selectInput,
+    dateInput,
+    radioInput
   },
   props: {
     fields: {

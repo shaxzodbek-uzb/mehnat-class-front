@@ -13,3 +13,44 @@ export const users = {
     }
   ]
 };
+export const genders = [
+  { value: 1, label: "Мужчина" },
+  { value: 2, label: "Женщина" }
+];
+export const userFields = [
+  {
+    key: "fullname",
+    type: "text",
+    label: "Ф.И.О.",
+    placeholder: "Введите полное имя",
+    value: ""
+  },
+  {
+    key: "password",
+    type: "password",
+    label: "Пароль",
+    placeholder: "Введите новый пароль",
+    value: ""
+  },
+  {
+    key: "birth_date",
+    type: "date",
+    label: "Дата рождения",
+    placeholder: "Введите дату рождения",
+    value: ""
+  },
+  {
+    key: "phone",
+    type: "text",
+    label: "Телефон",
+    placeholder: "Введите номер телефона",
+    value: ""
+  },
+  {
+    key: "gender",
+    type: "radio",
+    label: "Пол",
+    value: "",
+    options: genders
+  }
+];

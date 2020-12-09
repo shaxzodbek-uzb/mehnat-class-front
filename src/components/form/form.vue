@@ -1,16 +1,29 @@
 <template>
-  <CreateComponent
-    :fields="fields"
-    apiSlug="comments"
-    indexViewName="CommentIndex"
-    title="комментарий"
-  />
+  <div>
+    {{ user }}
+    <CreateComponent
+      :fields="fields"
+      apiSlug="comments"
+      indexViewName="CommentIndex"
+      title="комментарий"
+    />
+    {{ fields }}
+  </div>
 </template>
 
 <script>
 import CreateComponent from "@/components/core/create";
+import { genders } from "@/data/index";
 
 export default {
+  props: {
+    user: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
   data() {
     return {
       fields: [
@@ -19,7 +32,7 @@ export default {
           type: "text",
           label: "Ф.И.О.",
           placeholder: "Введите полное имя",
-          value: ""
+          value: this.user.fullname
         },
         {
           key: "password",
@@ -40,18 +53,15 @@ export default {
           type: "text",
           label: "Телефон",
           placeholder: "Введите номер телефона",
-          value: ""
+          value: this.user.phone
         },
         {
           key: "gender",
           type: "radio",
           label: "Пол",
-          options: this.genders
+          value: "",
+          options: genders
         }
-      ],
-      genders: [
-        { value: 1, label: "Erkak" },
-        { value: 2, label: "Ayol" }
       ]
     };
   },

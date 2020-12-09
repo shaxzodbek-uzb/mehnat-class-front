@@ -4,7 +4,8 @@
       :label="label"
       type="password"
       :placeholder="placeholder"
-      v-model="value"
+      @input="onInput"
+      v-bind:value="value"
     />
   </CCol>
 </template>
@@ -22,7 +23,12 @@ export default {
     },
     value: {
       type: String,
-      default: null
+      default: ""
+    }
+  },
+  methods: {
+    onInput(v) {
+      this.$emit("input", v);
     }
   }
 };
