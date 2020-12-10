@@ -60,8 +60,8 @@ export const articleFields = [
     type: "select",
     label: "Пользователь",
     placeholder: "Пользователь idsini kiritirng",
-    options: "",
-    value: ""
+    options: [],
+    value: 0
   },
   {
     key: "alias",
@@ -86,14 +86,16 @@ export const commentFields = [
     type: "select",
     label: "Foydalanuvchi",
     placeholder: "Foydalanuvchi idsini kiritirng",
-    value: "asdasd"
+    options: [],
+    value: 0
   },
   {
     key: "article_id",
     type: "select",
     label: "Maqola",
     placeholder: "Maqola idsini kiritirng",
-    value: ""
+    options: [],
+    value: 0
   },
 
   {

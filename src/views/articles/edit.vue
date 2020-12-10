@@ -35,8 +35,10 @@ export default {
     );
     this.$api(`users`, { params: { include: "articles" } }).then(
       ({ data: { data } }) => {
-        this.fields[0].options = data[0].fullname;
-        this.fields[0].value = data[0].id;
+        data.forEach(option => {
+          this.fields[0].options.push(option.fullname);
+          this.fields[0].value = option.id;
+        });
         this.loaded = true;
       }
     );

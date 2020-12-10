@@ -34,6 +34,24 @@ export default {
         this.loaded = true;
       }
     );
+    this.$api(`users`, { params: { include: "articles" } }).then(
+      ({ data: { data } }) => {
+        data.forEach(option => {
+          this.fields[0].options.push(option.fullname);
+          this.fields[0].value = option.id;
+        });
+        this.loaded = true;
+      }
+    );
+    this.$api(`articles`, { params: { include: "user" } }).then(
+      ({ data: { data } }) => {
+        data.forEach(option => {
+          this.fields[1].options.push(option.alias);
+          this.fields[1].value = option.id;
+        });
+        this.loaded = true;
+      }
+    );
   }
 };
 </script>

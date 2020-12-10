@@ -22,7 +22,7 @@ export default {
       default: "Placeholder"
     },
     value: {
-      type: String,
+      type: Number,
       default: null
     },
     options: {

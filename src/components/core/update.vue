@@ -79,7 +79,6 @@ export default {
         const element = this.fields[index];
         params[element.key] = element.value;
       }
-      console.log(params);
       this.$api.put(`${this.apiSlug}/${this.id}`, params).then(res => {
         if (res.data.success) {
           this.$router.push({ name: this.indexViewName });
