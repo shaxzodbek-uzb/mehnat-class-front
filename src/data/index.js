@@ -54,3 +54,27 @@ export const userFields = [
     options: genders
   }
 ];
+export const articleFields = [
+  {
+    key: "user_id",
+    type: "text",
+    label: "Пользователь",
+    placeholder: "Пользователь idsini kiritirng",
+    value: ""
+  },
+  {
+    key: "alias",
+    type: "text",
+    label: "Maqola",
+    placeholder: "Maqola annotatsiyasini kiriting",
+    value: ""
+  },
+
+  {
+    key: "text",
+    type: "textArea",
+    label: "Firk",
+    placeholder: "Fikr mazmuni",
+    value: ""
+  }
+];
