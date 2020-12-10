@@ -35,10 +35,14 @@ export default {
     );
     this.$api(`users`, { params: { include: "articles" } }).then(
       ({ data: { data } }) => {
-        data.forEach(option => {
-          this.fields[0].options.push(option.fullname);
-          this.fields[0].value = option.id;
-        });
+        if (!(this.fields[0].options && this.fields[0].options.length)) {
+          data.forEach(option => {
+            this.fields[0].options.push({
+              label: option.fullname,
+              value: option.id
+            });
+          });
+        }
         this.loaded = true;
       }
     );

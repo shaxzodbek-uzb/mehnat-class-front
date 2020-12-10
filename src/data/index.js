@@ -59,15 +59,15 @@ export const articleFields = [
     key: "user_id",
     type: "select",
     label: "Пользователь",
-    placeholder: "Пользователь idsini kiritirng",
+    placeholder: "Выберите пользователя",
     options: [],
-    value: 0
+    value: null
   },
   {
     key: "alias",
     type: "text",
     label: "Maqola",
-    placeholder: "Maqola annotatsiyasini kiriting",
+    placeholder: "Добавьте аннотацию к статье",
     value: ""
   },
 
@@ -75,7 +75,7 @@ export const articleFields = [
     key: "text",
     type: "textArea",
     label: "Firk",
-    placeholder: "Fikr mazmuni",
+    placeholder: "Содержание мысли",
     value: ""
   }
 ];
@@ -87,7 +87,7 @@ export const commentFields = [
     label: "Foydalanuvchi",
     placeholder: "Foydalanuvchi idsini kiritirng",
     options: [],
-    value: 0
+    value: null
   },
   {
     key: "article_id",
@@ -95,7 +95,7 @@ export const commentFields = [
     label: "Maqola",
     placeholder: "Maqola idsini kiritirng",
     options: [],
-    value: 0
+    value: null
   },
 
   {

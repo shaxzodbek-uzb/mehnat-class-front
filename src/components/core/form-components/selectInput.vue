@@ -4,9 +4,10 @@
       :label="label"
       :options="options"
       :placeholder="placeholder"
-      v-bind:value="value"
-      @select="onSelect"
+      :value.sync="selectedOption"
+      @input="onChange(selectedOption)"
     />
+    {{ selectedOption }}
   </CCol>
 </template>
 
@@ -32,9 +33,15 @@ export default {
       }
     }
   },
+  data() {
+    return { selectedOption: "" };
+  },
+  mounted() {
+    this.selectedOption = this.value;
+  },
   methods: {
-    onSelect(v) {
-      this.$emit("select", v);
+    onChange(v) {
+      this.$emit("input", v);
     }
   }
 };

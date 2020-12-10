@@ -34,24 +34,40 @@ export default {
         this.loaded = true;
       }
     );
-    this.$api(`users`, { params: { include: "articles" } }).then(
-      ({ data: { data } }) => {
-        data.forEach(option => {
-          this.fields[0].options.push(option.fullname);
-          this.fields[0].value = option.id;
-        });
-        this.loaded = true;
-      }
-    );
-    this.$api(`articles`, { params: { include: "user" } }).then(
-      ({ data: { data } }) => {
-        data.forEach(option => {
-          this.fields[1].options.push(option.alias);
-          this.fields[1].value = option.id;
-        });
-        this.loaded = true;
-      }
-    );
+    this.getUsers();
+    this.getArticles();
+  },
+  methods: {
+    getUsers() {
+      this.$api(`users`, { params: { include: "articles" } }).then(
+        ({ data: { data } }) => {
+          if (!(this.fields[0].options && this.fields[0].options.length)) {
+            data.forEach(option => {
+              this.fields[0].options.push({
+                label: option.fullname,
+                value: option.id
+              });
+            });
+          }
+          this.loaded = true;
+        }
+      );
+    },
+    getArticles() {
+      this.$api(`articles`, { params: { include: "user" } }).then(
+        ({ data: { data } }) => {
+          if (!(this.fields[1].options && this.fields[1].options.length)) {
+            data.forEach(option => {
+              this.fields[1].options.push({
+                label: option.alias,
+                value: option.id
+              });
+            });
+          }
+          this.loaded = true;
+        }
+      );
+    }
   }
 };
 </script>
