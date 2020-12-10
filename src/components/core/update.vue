@@ -26,7 +26,7 @@
           variant="outline"
           @click="save"
         >
-          <CIcon name="cil-user-plus" />Сохранить
+          <CIcon name="cil-user-plus" />Oтредактировать
         </CButton>
       </CCardBody>
     </CCard>
@@ -59,6 +59,10 @@ export default {
       type: String,
       default: ""
     },
+    id: {
+      type: Number,
+      default: 0
+    },
     indexViewName: {
       type: String,
       default: ""
@@ -76,7 +80,7 @@ export default {
         params[element.key] = element.value;
       }
       console.log(params);
-      this.$api.post(`${this.apiSlug}`, params).then(res => {
+      this.$api.put(`${this.apiSlug}/${this.id}`, params).then(res => {
         if (res.data.success) {
           this.$router.push({ name: this.indexViewName });
         } else {

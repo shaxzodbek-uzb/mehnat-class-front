@@ -57,9 +57,10 @@ export const userFields = [
 export const articleFields = [
   {
     key: "user_id",
-    type: "text",
+    type: "select",
     label: "Пользователь",
     placeholder: "Пользователь idsini kiritirng",
+    options: "",
     value: ""
   },
   {
@@ -67,6 +68,31 @@ export const articleFields = [
     type: "text",
     label: "Maqola",
     placeholder: "Maqola annotatsiyasini kiriting",
+    value: ""
+  },
+
+  {
+    key: "text",
+    type: "textArea",
+    label: "Firk",
+    placeholder: "Fikr mazmuni",
+    value: ""
+  }
+];
+
+export const commentFields = [
+  {
+    key: "user_id",
+    type: "select",
+    label: "Foydalanuvchi",
+    placeholder: "Foydalanuvchi idsini kiritirng",
+    value: "asdasd"
+  },
+  {
+    key: "article_id",
+    type: "select",
+    label: "Maqola",
+    placeholder: "Maqola idsini kiritirng",
     value: ""
   },
 

@@ -5,6 +5,7 @@
     apiSlug="articles"
     indexViewName="ArticleIndex"
     title="статью"
+    :id="id"
   />
 </template>
 
@@ -16,19 +17,26 @@ export default {
   data() {
     return {
       fields: [],
-      loaded: false
+      loaded: false,
+      id: 0
     };
   },
   components: { UpdateComponent },
   mounted() {
     this.fields = articleFields;
-    let id = this.$route.params.id;
+    this.id = this.$route.params.id;
     this.loaded = false;
-    this.$api(`articles/${id}`, { params: { include: "user" } }).then(
+    this.$api(`articles/${this.id}`, { params: { include: "user" } }).then(
       ({ data: { data } }) => {
-        this.fields[0].value = data.user.data.id;
         this.fields[1].value = data.alias;
         this.fields[2].value = data.text;
+        this.loaded = true;
+      }
+    );
+    this.$api(`users`, { params: { include: "articles" } }).then(
+      ({ data: { data } }) => {
+        this.fields[0].options = data[0].fullname;
+        this.fields[0].value = data[0].id;
         this.loaded = true;
       }
     );
