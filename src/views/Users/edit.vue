@@ -1,47 +1,25 @@
 <template>
-  <CContainer class="c-app flex-column" :fluid="true">
-    <router-link :to="{ name: 'UserIndex' }" class="mb-3">
-      <CIcon name="cilArrowLeft" /> Foydalanuvchilar ro'yhatiga qaytish
-    </router-link>
-    <CCard class="w-100 bg-white">
-      <CCardHeader>
-        Foydalanuvchini tahrirlash
-      </CCardHeader>
-      <CCardBody class="justify-content-center">
-        <FormUser :user="user" />
-        <CButton
-          color="info float-right"
-          shape="pill"
-          variant="outline"
-          @click="updateUser"
-        >
-          <CIcon name="cil-user-plus" />Saqlash
-        </CButton>
-      </CCardBody>
-    </CCard>
-  </CContainer>
+  <CreateComponent
+    :fields="fields"
+    apiSlug="users"
+    indexViewName="UserIndex"
+    title="пользователь"
+  />
 </template>
+
 <script>
-import FormUser from "@/components/form/form";
+import CreateComponent from "@/components/core/create";
+import { userFields } from "@/data/index";
+
 export default {
-  name: "UserCreate",
-  components: {
-    FormUser
-  },
   data() {
     return {
-      user: {
-        id: "",
-        fullname: "",
-        username: "",
-        status: "",
-        birth_date: "",
-        phone: "",
-        gender: ""
-      }
+      fields: []
     };
   },
+  components: { CreateComponent },
   mounted() {
+    this.fields = userFields;
     let id = this.$route.params.id;
     this.$api(`users/${id}`, { params: { include: "articles.comments" } }).then(
       ({ data: { data } }) => {
@@ -54,18 +32,6 @@ export default {
         this.user.gender = data.gender;
       }
     );
-  },
-  methods: {
-    updateUser() {
-      this.$api.put(`users/${this.user.id}`, { ...this.user }).then(res => {
-        console.log(res);
-        if (res.data.success) {
-          this.$router.push({ name: "UserShow", params: { ...this.id } });
-        } else {
-          console.log("invalid data");
-        }
-      });
-    }
   }
 };
 </script>

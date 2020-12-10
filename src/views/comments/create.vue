@@ -9,38 +9,17 @@
 
 <script>
 import CreateComponent from "@/components/core/create";
+import { commentFields } from "@/data/index";
 
 export default {
   data() {
     return {
-      fields: [
-        {
-          key: "user_id",
-          type: "text",
-          label: "Foydalanuvchi",
-          placeholder: "Foydalanuvchi idsini kiritirng",
-          value: "asdasd"
-        },
-        {
-          key: "article_id",
-          type: "text",
-          label: "Maqola",
-          placeholder: "Maqola idsini kiritirng",
-          value: ""
-        },
-
-        {
-          key: "text",
-          type: "textArea",
-          label: "Firk",
-          placeholder: "Fikrmazmuni",
-          value: ""
-        }
-      ]
+      fields: []
     };
   },
-  components: { CreateComponent }
+  components: { CreateComponent },
+  mounted() {
+    this.fields = commentFields;
+  }
 };
 </script>
-
-<style></style>
