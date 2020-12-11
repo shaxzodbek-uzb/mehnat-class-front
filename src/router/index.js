@@ -30,7 +30,7 @@ function configRoutes() {
       path: "/",
       redirect: "/login",
       meta: { middleware: [auth] },
-      name: "Login",
+      name: "Home",
       component: TheContainer,
       children: [
         {

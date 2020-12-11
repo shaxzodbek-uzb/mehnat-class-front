@@ -1,11 +1,11 @@
 <template>
   <CCol sm="12">
     <CInput
+      type="date"
       :label="label"
-      type="password"
       :placeholder="placeholder"
-      @input="onInput"
       v-bind:value="value"
+      v-on:input="onInput"
     />
   </CCol>
 </template>
@@ -23,7 +23,7 @@ export default {
     },
     value: {
       type: String,
-      default: ""
+      default: null
     }
   },
   methods: {

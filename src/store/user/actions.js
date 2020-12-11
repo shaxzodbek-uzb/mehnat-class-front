@@ -1,4 +1,3 @@
-// import { loginKadrlar, login, store, getInfo, logout } from '@/api/user'
 import { setToken, removeToken } from "@/utils/auth";
 import { resetRouter } from "@/router";
 import axios from "axios";
@@ -26,7 +25,7 @@ export const actions = {
   logout({ commit }) {
     return new Promise((resolve, reject) => {
       axios
-        .get("logout")
+        .post("logout")
         .then(res => {
           commit("SET_USER_TOKEN", "");
           commit("SET_IS_AUTH", false);

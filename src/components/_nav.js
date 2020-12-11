@@ -4,29 +4,19 @@ export default [
     _children: [
       {
         _name: "CSidebarNavItem",
-        name: "Dashboard",
-        to: "/dashboard",
-        icon: "cil-speedometer",
-        badge: {
-          color: "primary",
-          text: "NEW"
-        }
-      },
-      {
-        _name: "CSidebarNavItem",
-        name: "Users",
+        name: "Пользователи",
         to: "/users",
         icon: "cil-user"
       },
       {
         _name: "CSidebarNavItem",
-        name: "Articles",
+        name: "Статьи",
         to: "/articles",
         icon: "cil-text"
       },
       {
         _name: "CSidebarNavItem",
-        name: "Comments",
+        name: "Комментарии",
         to: "/comments",
         icon: "cil-comment-square"
       }

@@ -1,12 +1,13 @@
 <template>
   <CCol sm="12">
-    <CInput
+    <CSelect
       :label="label"
-      type="password"
+      :options="options"
       :placeholder="placeholder"
-      @input="onInput"
-      v-bind:value="value"
+      :value.sync="selectedOption"
+      @input="onChange(selectedOption)"
     />
+    {{ selectedOption }}
   </CCol>
 </template>
 
@@ -22,12 +23,24 @@ export default {
       default: "Placeholder"
     },
     value: {
-      type: String,
-      default: ""
+      type: Number,
+      default: null
+    },
+    options: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
+  data() {
+    return { selectedOption: "" };
+  },
+  mounted() {
+    this.selectedOption = this.value;
+  },
   methods: {
-    onInput(v) {
+    onChange(v) {
       this.$emit("input", v);
     }
   }
