@@ -1,35 +1,36 @@
 <template>
-  <CreateComponent
+  <updateComponent
     :fields="fields"
+    :id="id"
     apiSlug="users"
     indexViewName="UserIndex"
-    title="пользователь"
+    title="пользователя"
   />
 </template>
 
 <script>
-import CreateComponent from "@/components/core/create";
+import updateComponent from "@/components/core/update";
 import { userFields } from "@/data/index";
 
 export default {
   data() {
     return {
-      fields: []
+      fields: [],
+      id: null
     };
   },
-  components: { CreateComponent },
+  components: { updateComponent },
   mounted() {
     this.fields = userFields;
     let id = this.$route.params.id;
     this.$api(`users/${id}`, { params: { include: "articles.comments" } }).then(
       ({ data: { data } }) => {
-        this.user.fullname = data.fullname;
-        this.user.username = data.username;
-        this.user.status = data.status;
-        this.user.birth_date = data.birth_date;
-        this.user.id = data.id;
-        this.user.phone = data.phone;
-        this.user.gender = data.gender;
+        this.fields[0].value = data.fullname;
+        this.fields[1].value = data.password;
+        this.fields[2].value = data.birth_date;
+        this.fields[3].value = data.phone;
+        this.fields[4].value = data.gender;
+        this.id = data.id;
       }
     );
   }

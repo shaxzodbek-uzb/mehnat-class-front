@@ -19,22 +19,6 @@
         {{ item.label }}
       </label>
     </div>
-    <!-- <div v-if="options.length" class="form-group form-row m-1">
-      <div
-        v-for="(item, index) in options"
-        :key="index"
-        class="custom-control custom-radio custom-control-inline"
-      >
-        <input
-          type="radio"
-          v-bind:value="item.value"
-          @input="onChange(item.value)"
-          :label="item.value"
-          class="custom-control-input"
-        />
-        <label class="custom-control-label" :for="'cutom' + index"> </label>
-      </div>
-    </div> -->
   </CCol>
 </template>
 

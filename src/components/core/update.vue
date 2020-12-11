@@ -1,10 +1,10 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
-    <router-link :to="{ name: 'UserIndex' }" class="mb-3">
+    <router-link :to="{ name: indexViewName }" class="mb-3">
       <CIcon name="cilArrowLeft" /> Назад
     </router-link>
     <CCard class="w-100 bg-white">
-      <CCardHeader> Oтредактировать {{ title }} </CCardHeader>
+      <CCardHeader> Редактировать {{ title }} </CCardHeader>
       <CCardBody class="justify-content-center">
         <CForm>
           <CRow>
