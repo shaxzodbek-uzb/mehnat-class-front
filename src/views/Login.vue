@@ -69,7 +69,12 @@
         </CCol>
       </CRow>
     </CContainer>
-    <RegisterModal v-if="show" :show="show" @close="show = false" />
+    <RegisterModal
+      v-if="show"
+      :show="show"
+      @getUsername="getUsername"
+      @close="show = false"
+    />
   </div>
 </template>
 
@@ -102,6 +107,9 @@ export default {
     ...mapActions({ login: "user/login" }),
     Register() {
       this.show = true;
+    },
+    getUsername(username) {
+      this.credientials.username = username;
     },
     createUser() {
       this.$api.post(`users`, { ...this.user }).then(res => {

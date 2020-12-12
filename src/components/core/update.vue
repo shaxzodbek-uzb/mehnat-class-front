@@ -18,7 +18,6 @@
               v-model="field.value"
             >
             </component>
-            {{ fields }}
           </CRow>
         </CForm>
         <CButton

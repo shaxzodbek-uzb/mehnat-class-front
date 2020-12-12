@@ -7,6 +7,18 @@
       :value.sync="selectedOption"
       @input="onChange(selectedOption)"
     />
+    <!-- <label for="select">{{ label }}</label>
+    <select class="form-control" name="select" @change="onChange(value)">
+      <option
+        v-for="(option, index) in options"
+        :key="index"
+        :value="option.value"
+        :label="option.label"
+        :placeholder="placeholder"
+      ></option>
+    </select> -->
+    <!-- <br /> -->
+    {{ value }}
     {{ selectedOption }}
   </CCol>
 </template>
