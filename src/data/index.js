@@ -66,7 +66,7 @@ export const articleFields = [
   {
     key: "alias",
     type: "text",
-    label: "Maqola",
+    label: "Статья",
     placeholder: "Добавьте аннотацию к статье",
     value: ""
   },
@@ -74,7 +74,7 @@ export const articleFields = [
   {
     key: "text",
     type: "textArea",
-    label: "Firk",
+    label: "Комментарий",
     placeholder: "Содержание мысли",
     value: ""
   }
@@ -84,16 +84,16 @@ export const commentFields = [
   {
     key: "user_id",
     type: "select",
-    label: "Foydalanuvchi",
-    placeholder: "Foydalanuvchi idsini kiritirng",
+    label: "Пользователь",
+    placeholder: "Введите ID пользователя",
     options: [],
     value: null
   },
   {
     key: "article_id",
     type: "select",
-    label: "Maqola",
-    placeholder: "Maqola idsini kiritirng",
+    label: "Статья",
+    placeholder: "Введите ID статьи",
     options: [],
     value: null
   },
@@ -101,8 +101,8 @@ export const commentFields = [
   {
     key: "text",
     type: "textArea",
-    label: "Firk",
-    placeholder: "Fikr mazmuni",
+    label: "Комментарий",
+    placeholder: "Содержание мысли",
     value: ""
   }
 ];

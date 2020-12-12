@@ -5,21 +5,7 @@
       :options="options"
       :placeholder="placeholder"
       :value.sync="selectedOption"
-      @input="onChange(selectedOption)"
     />
-    <!-- <label for="select">{{ label }}</label>
-    <select class="form-control" name="select" @change="onChange(value)">
-      <option
-        v-for="(option, index) in options"
-        :key="index"
-        :value="option.value"
-        :label="option.label"
-        :placeholder="placeholder"
-      ></option>
-    </select> -->
-    <!-- <br /> -->
-    {{ value }}
-    {{ selectedOption }}
   </CCol>
 </template>
 
@@ -51,9 +37,11 @@ export default {
   mounted() {
     this.selectedOption = this.value;
   },
-  methods: {
-    onChange(v) {
-      this.$emit("input", v);
+  watch: {
+    selectedOption(newVal, oldVal) {
+      if (newVal && newVal !== oldVal) {
+        this.$emit("input", newVal);
+      }
     }
   }
 };
