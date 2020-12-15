@@ -19,7 +19,15 @@
           hover
           pagination
         >
-          <template #user="{item}">
+          <component
+            v-for="(field, index) in fields"
+            :key="index"
+            :is="field.type"
+            v-model="item"
+            :field="field"
+          >
+          </component>
+          <!-- <template #{field.key}="{item}">
             <td>
               <h5>{{ item.user.data.fullname }}</h5>
               <p
@@ -61,7 +69,7 @@
                 item.articles.data.length == 0 ? " " : item.articles.data.alias
               }}
             </td>
-          </template>
+          </template> -->
         </CDataTable>
       </CCardBody>
     </CCard>
@@ -69,7 +77,17 @@
 </template>
 
 <script>
+const belongsToField = () =>
+  import("@/components/core/fields/index/belongsToField");
+const idField = () => import("@/components/core/fields/index/idField");
+const textField = () => import("@/components/core/fields/index/textField");
+
 export default {
+  components: {
+    belongsToField,
+    idField,
+    textField
+  },
   props: {
     objectName: {
       type: String,
@@ -78,12 +96,6 @@ export default {
     pageTitle: {
       type: String,
       default: "Страница объектов"
-    },
-    fields: {
-      type: Array,
-      default() {
-        return [];
-      }
     },
     createViewName: {
       type: String,
@@ -109,12 +121,15 @@ export default {
   data() {
     return {
       items: [],
-      details: []
+      details: [],
+      fields: []
     };
   },
   mounted() {
     this.$api(this.urlSlug, { params: { include: this.apiIncludes } }).then(
-      ({ data: { data } }) => (this.items = data)
+      ({ data: { data, fields } }) => (
+        (this.items = data), (this.fields = fields)
+      )
     );
   },
   methods: {

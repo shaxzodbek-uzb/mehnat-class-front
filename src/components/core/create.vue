@@ -49,12 +49,6 @@ export default {
     radioInput
   },
   props: {
-    fields: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
     apiSlug: {
       type: String,
       default: ""
