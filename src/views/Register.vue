@@ -25,7 +25,7 @@
           color="info float-right"
           shape="pill"
           variant="outline"
-          @click="saveUser"
+          @click="save"
         >
           <CIcon name="cil-user-plus" />Сохранить
         </CButton>
@@ -96,9 +96,10 @@ export default {
         params[element.key] = element.value;
       }
       console.log(params);
-      this.$api.post(`${this.apiSlug}`, params).then(res => {
-        if (res.data.success) {
-          this.$router.push({ name: this.indexViewName });
+      this.$api.post(`users`, params).then(({ data: { data } }) => {
+        if (data) {
+          this.$emit("getUsername", data.username);
+          this.$emit("close");
         } else {
           console.log("invalid data");
         }

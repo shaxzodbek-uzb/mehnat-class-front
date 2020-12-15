@@ -5,9 +5,7 @@
       :options="options"
       :placeholder="placeholder"
       :value.sync="selectedOption"
-      @input="onChange(selectedOption)"
     />
-    {{ selectedOption }}
   </CCol>
 </template>
 
@@ -39,9 +37,11 @@ export default {
   mounted() {
     this.selectedOption = this.value;
   },
-  methods: {
-    onChange(v) {
-      this.$emit("input", v);
+  watch: {
+    selectedOption(newVal, oldVal) {
+      if (newVal && newVal !== oldVal) {
+        this.$emit("input", newVal);
+      }
     }
   }
 };
