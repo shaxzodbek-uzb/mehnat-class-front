@@ -70,6 +70,10 @@ export default {
       default() {
         return {};
       }
+    },
+    apiIncludes: {
+      type: String,
+      default: ""
     }
   },
   name: "Article",
@@ -87,7 +91,7 @@ export default {
     getData() {
       let id = this.$route.params.id;
       this.$api(`${this.key}/${id}`, {
-        params: { include: "user.comments" }
+        params: { include: this.apiIncludes }
       }).then(({ data: { data } }) => {
         this.object = data;
       });
