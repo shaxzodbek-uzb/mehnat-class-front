@@ -2,6 +2,7 @@
   <BaseShow
     key="articles"
     title="Article details"
+    apiIncludes="user.articles"
     :tableData="this.tableData"
     :backButton="{ name: 'ArticleIndex' }"
     updateForm="'@/components/articles/updateForm"

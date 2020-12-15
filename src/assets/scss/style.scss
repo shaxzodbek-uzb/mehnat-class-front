@@ -6,3 +6,9 @@
 
 // If you want to add something do it here
 @import "custom";
+/* ./src/index.css */
+
+/*! @import */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
