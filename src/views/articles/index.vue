@@ -1,6 +1,5 @@
 <template>
   <IndexComponent
-    :fields="fields"
     createViewName="ArticleCreate"
     editViewName="ArticleEdit"
     showViewName="ArticleShow"
@@ -13,15 +12,11 @@
 </template>
 
 <script>
-import { articles as articleData } from "@/data/article";
 import IndexComponent from "@/components/core/index";
 export default {
-  name: "ArticleIndex",
+  name: "CommentIndex",
   components: {
     IndexComponent
-  },
-  data() {
-    return { fields: articleData.fields };
   }
 };
 </script>

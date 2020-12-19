@@ -1,7 +1,7 @@
 <template>
   <CreateComponent
     :fields="fields"
-    apiSlug="comments"
+    urlSlug="comments"
     indexViewName="CommentIndex"
     title="комментарий"
   />
@@ -9,17 +9,8 @@
 
 <script>
 import CreateComponent from "@/components/core/create";
-import { commentFields } from "@/data/index";
 
 export default {
-  data() {
-    return {
-      fields: []
-    };
-  },
-  components: { CreateComponent },
-  mounted() {
-    this.fields = commentFields;
-  }
+  components: { CreateComponent }
 };
 </script>

@@ -1,25 +1,20 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
+    {{ form }}
     <router-link :to="{ name: 'UserIndex' }" class="mb-3">
       <CIcon name="cilArrowLeft" /> Назад
     </router-link>
     <CCard class="w-100 bg-white">
       <CCardHeader> Добавить {{ title }} </CCardHeader>
       <CCardBody class="justify-content-center">
-        <CForm>
-          <CRow>
-            <component
-              v-for="field in fields"
-              :key="field.key"
-              :options="field.options"
-              :label="field.label"
-              :placeholder="field.placeholder"
-              :is="field.type + 'Input'"
-              v-model="field.value"
-            >
-            </component>
-          </CRow>
-        </CForm>
+        <component
+          v-for="field in fields"
+          :key="field.key"
+          :field="field"
+          v-model="form[field.key]"
+          :is="field.type"
+        >
+        </component>
         <CButton
           color="info float-right"
           shape="pill"
@@ -33,23 +28,23 @@
   </CContainer>
 </template>
 <script>
-import textInput from "@/components/core/form-components/textInput";
-import textAreaInput from "@/components/core/form-components/textAreaInput";
-import passwordInput from "@/components/core/form-components/passwordInput";
-import selectInput from "@/components/core/form-components/selectInput";
-import dateInput from "@/components/core/form-components/dateInput";
-import radioInput from "@/components/core/form-components/radioInput";
+import textField from "@/components/core/fields/form/textField";
+import idField from "@/components/core/fields/form/idField";
+import belongsToField from "@/components/core/fields/form/belongsToField";
 export default {
+  data() {
+    return {
+      fields: [],
+      form: {}
+    };
+  },
   components: {
-    textInput,
-    textAreaInput,
-    passwordInput,
-    selectInput,
-    dateInput,
-    radioInput
+    textField,
+    idField,
+    belongsToField
   },
   props: {
-    apiSlug: {
+    urlSlug: {
       type: String,
       default: ""
     },
@@ -62,6 +57,15 @@ export default {
       default: ""
     }
   },
+  mounted() {
+    this.$api(`${this.urlSlug}/create`, {
+      params: { include: this.apiIncludes }
+    }).then(
+      ({ data: { fields } }) => (
+        console.log(fields), this.fields.push(...fields)
+      )
+    );
+  },
   methods: {
     save() {
       let params = {};
@@ -70,7 +74,7 @@ export default {
         params[element.key] = element.value;
       }
       console.log(params);
-      this.$api.post(`${this.apiSlug}`, params).then(res => {
+      this.$api.post(`${this.urlSlug}`, params).then(res => {
         if (res.data.success) {
           this.$router.push({ name: this.indexViewName });
         } else {

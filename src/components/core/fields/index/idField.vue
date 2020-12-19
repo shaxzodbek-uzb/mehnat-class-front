@@ -1,17 +1,17 @@
 <template>
-  <div>
-    {{ value }}
-  </div>
+  <div>{{ value[field.key] }}</div>
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: Object,
+      default: () => {}
+    },
     field: {
       type: Object,
-      default() {
-        return {};
-      }
+      default: () => {}
     }
   }
 };

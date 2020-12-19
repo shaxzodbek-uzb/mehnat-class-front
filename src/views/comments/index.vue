@@ -4,7 +4,7 @@
     editViewName="CommentEdit"
     showViewName="CommentShow"
     urlSlug="comments"
-    apiIncludes="user,articles"
+    apiIncludes="user,article"
     pageTitle="Страница комментариев"
     objectName="Комментарий"
   >

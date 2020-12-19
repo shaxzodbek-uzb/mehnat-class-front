@@ -1,92 +1,23 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
-    <CCard class="w-100 bg-white">
-      <CCardHeader class="">
-        <h4 class="d-inline">{{ this.pageTitle }}</h4>
-        <router-link :to="{ name: createViewName }">
-          <CButton color="info float-right">
-            <CIcon name="cil-user-plus" /> Создайте новый {{ objectName }}
-          </CButton>
-        </router-link>
-      </CCardHeader>
-
-      <CCardBody>
-        <CDataTable
-          :items="items"
-          :fields="fields"
-          items-per-page-select
-          :items-per-page="15"
-          hover
-          pagination
-        >
-          <component
-            v-for="(field, index) in fields"
-            :key="index"
-            :is="field.type"
-            v-model="item"
-            :field="field"
-          >
-          </component>
-          <!-- <template #{field.key}="{item}">
-            <td>
-              <h5>{{ item.user.data.fullname }}</h5>
-              <p
-                class="text-primary"
-                style="cursor:pointer"
-                @click="show(item.id)"
-              >
-                {{ "@" + item.user.data.username }}
-              </p>
-            </td>
-          </template>
-          <template #actions="{item}">
-            <td class="py-2" style="display:flex">
-              <CLink class="mr-3" @click="edit(item.id)">
-                <CButton color="info" variant="outline"
-                  ><CIcon name="cil-pencil"
-                /></CButton>
-              </CLink>
-              <CLink class="mr-3" @click="delete item.id">
-                <CButton color="danger" variant="outline"
-                  ><CIcon name="cil-trash"
-                /></CButton>
-              </CLink>
-            </td>
-          </template>
-
-          <template #birth_date="{item}">
-            <td>
-              {{
-                item.birth_date
-                  ? new Date().getFullYear() - item.birth_date.slice(0, 4)
-                  : 10
-              }}
-            </td>
-          </template>
-          <template #article="{item}">
-            <td style="opacity: 0.8">
-              {{
-                item.articles.data.length == 0 ? " " : item.articles.data.alias
-              }}
-            </td>
-          </template> -->
-        </CDataTable>
-      </CCardBody>
-    </CCard>
+    <div class="pb-4">
+      <div class="d-inline text-xl">{{ this.pageTitle }}</div>
+      <router-link :to="{ name: createViewName }">
+        <CButton color="info float-right">
+          <CIcon name="cil-user-plus" /> Создайте новый {{ objectName }}
+        </CButton>
+      </router-link>
+    </div>
+    <DataTable :items="items" :fields="fields" />
   </CContainer>
 </template>
 
 <script>
-const belongsToField = () =>
-  import("@/components/core/fields/index/belongsToField");
-const idField = () => import("@/components/core/fields/index/idField");
-const textField = () => import("@/components/core/fields/index/textField");
+const DataTable = () => import("@/components/resource/table");
 
 export default {
   components: {
-    belongsToField,
-    idField,
-    textField
+    DataTable
   },
   props: {
     objectName: {
@@ -128,7 +59,7 @@ export default {
   mounted() {
     this.$api(this.urlSlug, { params: { include: this.apiIncludes } }).then(
       ({ data: { data, fields } }) => (
-        (this.items = data), (this.fields = fields)
+        (this.items = data), this.fields.push(...fields)
       )
     );
   },
