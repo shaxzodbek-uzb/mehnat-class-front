@@ -1,25 +1,32 @@
 <template>
   <CreateComponent
     :fields="fields"
-    apiSlug="users"
+    urlSlug="users"
     indexViewName="UserIndex"
     title="пользователь"
+    :items="items"
   />
 </template>
 
 <script>
 import CreateComponent from "@/components/core/create";
-import { userFields } from "@/data/index";
 
 export default {
   data() {
     return {
-      fields: []
+      fields: [],
+      items: [
+        {
+          id: 1,
+          label: "Мужчина"
+        },
+        {
+          id: 2,
+          label: "Женшина"
+        }
+      ]
     };
   },
-  components: { CreateComponent },
-  mounted() {
-    this.fields = userFields;
-  }
+  components: { CreateComponent }
 };
 </script>

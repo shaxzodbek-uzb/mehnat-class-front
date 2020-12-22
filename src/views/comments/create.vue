@@ -4,6 +4,7 @@
     urlSlug="comments"
     indexViewName="CommentIndex"
     title="комментарий"
+    belongsToIncludes="articles"
   />
 </template>
 

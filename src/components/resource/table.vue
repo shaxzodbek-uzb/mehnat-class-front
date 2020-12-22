@@ -54,11 +54,13 @@ const belongsToField = () =>
   import("@/components/core/fields/index/belongsToField");
 const idField = () => import("@/components/core/fields/index/idField");
 const textField = () => import("@/components/core/fields/index/textField");
+const selectField = () => import("@/components/core/fields/index/selectField");
 export default {
   components: {
     belongsToField,
     idField,
-    textField
+    textField,
+    selectField
   },
   props: {
     fields: {

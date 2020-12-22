@@ -11,6 +11,8 @@
           v-for="field in fields"
           :key="field.key"
           :field="field"
+          :belongsToIncludes="belongsToIncludes"
+          :items="items"
           v-model="form[field.key]"
           :is="field.type"
         >
@@ -31,6 +33,7 @@
 import textField from "@/components/core/fields/form/textField";
 import idField from "@/components/core/fields/form/idField";
 import belongsToField from "@/components/core/fields/form/belongsToField";
+import selectField from "@/components/core/fields/form/selectField";
 export default {
   data() {
     return {
@@ -41,7 +44,8 @@ export default {
   components: {
     textField,
     idField,
-    belongsToField
+    belongsToField,
+    selectField
   },
   props: {
     urlSlug: {
@@ -55,26 +59,26 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    belongsToIncludes: {
+      type: String,
+      default: ""
+    },
+    items: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   mounted() {
-    this.$api(`${this.urlSlug}/create`, {
-      params: { include: this.apiIncludes }
-    }).then(
-      ({ data: { fields } }) => (
-        console.log(fields), this.fields.push(...fields)
-      )
+    this.$api(`${this.urlSlug}/create`).then(({ data: { fields } }) =>
+      this.fields.push(...fields)
     );
   },
   methods: {
     save() {
-      let params = {};
-      for (let index = 0; index < this.fields.length; index++) {
-        const element = this.fields[index];
-        params[element.key] = element.value;
-      }
-      console.log(params);
-      this.$api.post(`${this.urlSlug}`, params).then(res => {
+      this.$api.post(`${this.urlSlug}`, this.form).then(res => {
         if (res.data.success) {
           this.$router.push({ name: this.indexViewName });
         } else {
