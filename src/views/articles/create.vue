@@ -1,27 +1,17 @@
 <template>
   <CreateComponent
     :fields="fields"
-    apiSlug="articles"
+    urlSlug="articles"
     indexViewName="ArticleIndex"
-    title="статью"
+    title="статей"
+    belongsToIncludes="articles"
   />
 </template>
 
 <script>
 import CreateComponent from "@/components/core/create";
-import { articleFields } from "@/data/index";
 
 export default {
-  data() {
-    return {
-      fields: []
-    };
-  },
-  components: { CreateComponent },
-  mounted() {
-    this.fields = articleFields;
-  }
+  components: { CreateComponent }
 };
 </script>
-
-<style></style>

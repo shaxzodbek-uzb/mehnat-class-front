@@ -2,7 +2,7 @@
   <div>
     <div class="col-span-6 sm:col-span-3">
       <label :for="field.key" class="block text-sm font-medium text-gray-700">{{
-        field.relation_name
+        field.label
       }}</label>
       <select
         :name="field.key"
@@ -10,7 +10,7 @@
         class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       >
         <option v-for="item in items" :key="item.id" :value="item.id">{{
-          item[field.related_object_title]
+          item.label
         }}</option>
       </select>
     </div>
@@ -26,22 +26,12 @@ export default {
         return {};
       }
     },
-    belongsToIncludes: {
-      type: String,
+    items: {
+      type: Array,
       default() {
         return {};
       }
     }
-  },
-  data() {
-    return {
-      items: []
-    };
-  },
-  mounted() {
-    this.$api(this.field.relation_name + "s", {
-      params: { include: this.belongsToIncludes }
-    }).then(({ data: { data } }) => (this.items = data));
   },
   methods: {
     onInput(v) {
