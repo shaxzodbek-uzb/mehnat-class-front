@@ -25,7 +25,7 @@
             <tbody class="bg-white divide-y divide-gray-200 text-gray-500">
               <tr v-for="item in items" :key="item.id">
                 <td
-                  class="px-6 py-4 whitespace-nowrap"
+                  class=" px-6 py-4 "
                   v-for="field in fields"
                   :key="field.key"
                 >
