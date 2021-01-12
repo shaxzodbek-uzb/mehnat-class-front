@@ -33,6 +33,7 @@ import textField from "@/components/core/fields/form/textField";
 import idField from "@/components/core/fields/form/idField";
 import belongsToField from "@/components/core/fields/form/belongsToField";
 import selectField from "@/components/core/fields/form/selectField";
+import passwordField from "@/components/core/fields/form/passwordField";
 export default {
   data() {
     return {
@@ -44,7 +45,8 @@ export default {
     textField,
     idField,
     belongsToField,
-    selectField
+    selectField,
+    passwordField
   },
   props: {
     urlSlug: {
