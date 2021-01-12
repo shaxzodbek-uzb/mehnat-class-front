@@ -4,22 +4,19 @@
       <CIcon name="cilArrowLeft" /> Назад
     </router-link>
     <CCard class="w-100 bg-white">
-      <CCardHeader> Редактировать {{ title }} </CCardHeader>
+      <CCardHeader> Редактировать {{ title }}</CCardHeader>
       <CCardBody class="justify-content-center">
-        <CForm>
-          <CRow>
-            <component
-              v-for="field in fields"
-              :key="field.key"
-              :options="field.options"
-              :label="field.label"
-              :placeholder="field.placeholder"
-              :is="field.type + 'Input'"
-              v-model="field.value"
-            >
-            </component>
-          </CRow>
-        </CForm>
+        <component
+          class="m-4"
+          v-for="field in fields"
+          :key="field.key"
+          :field="field"
+          :items="items"
+          :belongsToIncludes="belongsToIncludes"
+          :is="field.type"
+          v-model="form[field.key]"
+        >
+        </component>
         <CButton
           color="info float-right"
           shape="pill"
@@ -33,37 +30,36 @@
   </CContainer>
 </template>
 <script>
-import textInput from "@/components/core/form-components/textInput";
-import textAreaInput from "@/components/core/form-components/textAreaInput";
-import passwordInput from "@/components/core/form-components/passwordInput";
-import selectInput from "@/components/core/form-components/selectInput";
-import dateInput from "@/components/core/form-components/dateInput";
-import radioInput from "@/components/core/form-components/radioInput";
+import textField from "@/components/core/fields/form/textField";
+import idField from "@/components/core/fields/form/idField";
+import selectField from "@/components/core/fields/form/selectField";
+import dateField from "@/components/core/fields/form/dateField";
+import belongsToField from "@/components/core/fields/form/belongsToField";
 export default {
+  data() {
+    return {
+      id: 0,
+      form: {},
+      fields: []
+    };
+  },
   components: {
-    textInput,
-    textAreaInput,
-    passwordInput,
-    selectInput,
-    dateInput,
-    radioInput
+    textField,
+    idField,
+    selectField,
+    dateField,
+    belongsToField
   },
   props: {
-    fields: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
-    apiSlug: {
+    urlSlug: {
       type: String,
       default: ""
     },
-    id: {
-      type: Number,
-      default: 0
-    },
     indexViewName: {
+      type: String,
+      default: ""
+    },
+    belongsToIncludes: {
       type: String,
       default: ""
     },
@@ -72,14 +68,17 @@ export default {
       default: ""
     }
   },
+  mounted() {
+    this.id = this.$route.params.id;
+    this.$api(`${this.urlSlug}/${this.id}/edit`).then(
+      ({ data: { data, fields } }) => (
+        (this.form = data), this.fields.push(...fields)
+      )
+    );
+  },
   methods: {
     save() {
-      let params = {};
-      for (let index = 0; index < this.fields.length; index++) {
-        const element = this.fields[index];
-        params[element.key] = element.value;
-      }
-      this.$api.put(`${this.apiSlug}/${this.id}`, params).then(res => {
+      this.$api.put(`${this.urlSlug}/${this.id}`, this.form).then(res => {
         if (res.data.success) {
           this.$router.push({ name: this.indexViewName });
         } else {

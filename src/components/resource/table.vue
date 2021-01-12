@@ -17,8 +17,8 @@
                 >
                   {{ item.label }}
                 </th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Edit</span>
+                <th scope="col" class="px-6 py-3">
+                  <span class="text-gray-500">Опции</span>
                 </th>
               </tr>
             </thead>
@@ -34,8 +34,10 @@
                 <td
                   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                 >
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Edit</a
+                  <router-link
+                    :to="{ name: editViewName, params: { id: item.id } }"
+                    class="text-indigo-600 hover:text-indigo-900"
+                    >Редактировать</router-link
                   >
                 </td>
               </tr>
@@ -74,6 +76,10 @@ export default {
       default() {
         return [];
       }
+    },
+    editViewName: {
+      type: String,
+      default: ""
     }
   }
 };

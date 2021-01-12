@@ -1,6 +1,5 @@
 <template>
   <CContainer class="c-app flex-column" :fluid="true">
-    {{ form }}
     <router-link :to="{ name: 'UserIndex' }" class="mb-3">
       <CIcon name="cilArrowLeft" /> Назад
     </router-link>

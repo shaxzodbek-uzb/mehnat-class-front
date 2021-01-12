@@ -1,6 +1,5 @@
 <template>
   <CreateComponent
-    :fields="fields"
     urlSlug="articles"
     indexViewName="ArticleIndex"
     title="статей"

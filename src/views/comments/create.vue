@@ -1,6 +1,5 @@
 <template>
   <CreateComponent
-    :fields="fields"
     urlSlug="comments"
     indexViewName="CommentIndex"
     title="комментарий"
