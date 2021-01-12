@@ -39,10 +39,14 @@
                     class="text-indigo-600 hover:text-indigo-900"
                     >Редактировать</router-link
                   >
+                  <br />
+                  <router-link
+                    :to="{ name: showViewName, params: { id: item.id } }"
+                    class="text-indigo-600 hover:text-indigo-900"
+                    >Показать</router-link
+                  >
                 </td>
               </tr>
-
-              <!-- More rows... -->
             </tbody>
           </table>
         </div>
@@ -78,6 +82,10 @@ export default {
       }
     },
     editViewName: {
+      type: String,
+      default: ""
+    },
+    showViewName: {
       type: String,
       default: ""
     }

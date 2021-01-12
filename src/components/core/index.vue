@@ -8,7 +8,12 @@
         </CButton>
       </router-link>
     </div>
-    <DataTable :items="items" :fields="fields" :editViewName="editViewName" />
+    <DataTable
+      :items="items"
+      :fields="fields"
+      :editViewName="editViewName"
+      :showViewName="showViewName"
+    />
   </CContainer>
 </template>
 

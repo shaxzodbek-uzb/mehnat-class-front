@@ -19,51 +19,61 @@
         </router-link>
 
         <slot name="title">
-          {{ object.title }}
+          {{ title }}
         </slot>
       </CCardHeader>
       <CCardBody>
         <table class="table table-lg ">
           <thead>
             <tr class="table-info">
-              <th scope="col" v-for="item in tableData" :key="item.column">
-                {{ item.title }}
+              <th scope="col" v-for="item in fields" :key="item.column">
+                {{ item.label }}
               </th>
-              <!-- <th scope="col">Comments</th> -->
             </tr>
           </thead>
           <tbody>
             <tr class="table-light">
-              <td v-for="item in tableData" :key="item.column">
-                {{ object[item.column] }}
+              <td v-for="field in fields" :key="field.key">
+                <component :is="field.type" :value="object" :field="field" />
               </td>
-              <!-- <td :v-for="comment in object.user.data.comments.data">{{ comment }}</td> -->
             </tr>
           </tbody>
         </table>
       </CCardBody>
-      <!-- <registerForm v-if="editArticle" :showModal="showModal" /> -->
       <template :is="updateForm" />
     </CCard>
   </CContainer>
 </template>
 
 <script>
+const belongsToField = () =>
+  import("@/components/core/fields/index/belongsToField");
+const idField = () => import("@/components/core/fields/index/idField");
+const textField = () => import("@/components/core/fields/index/textField");
+const selectField = () => import("@/components/core/fields/index/selectField");
 export default {
+  name: "ArticleShow",
+  data() {
+    return {
+      object: {},
+      editArticle: false,
+      fields: []
+    };
+  },
+  components: {
+    belongsToField,
+    idField,
+    textField,
+    selectField
+  },
   props: {
-    key: {
+    urlSlug: {
       type: String,
       default: ""
     },
     title: {
       type: String,
       default: ""
-    },
-    tableData: {
-      type: Array,
-      default() {
-        return [];
-      }
     },
     backButton: {
       type: Object,
@@ -76,26 +86,18 @@ export default {
       default: ""
     }
   },
-  name: "Article",
-  components: {},
-  data() {
-    return {
-      object: {},
-      editArticle: false
-    };
-  },
+
   mounted() {
-    this.getData();
+    let id = this.$route.params.id;
+    this.$api(`${this.urlSlug}/${id}`, {
+      params: { include: this.apiIncludes }
+    }).then(
+      ({ data: { data, fields } }) => (
+        (this.object = data), this.fields.push(...fields)
+      )
+    );
   },
   methods: {
-    getData() {
-      let id = this.$route.params.id;
-      this.$api(`${this.key}/${id}`, {
-        params: { include: this.apiIncludes }
-      }).then(({ data: { data } }) => {
-        this.object = data;
-      });
-    },
     delete(id) {
       this.$api.delete(`${this.key}/${id}`).then(() => {
         window.location.reload();
